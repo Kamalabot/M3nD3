@@ -7,5 +7,5 @@ needed variety for the visualisation tasks, and goals.
 
 Vision is to build cool visuals and data explorations out there. It all begins with the humble
 
-1. [Scatter Plot](ScatterPlot.html)
-2. [Bar Chart](barChart.html)
+1. [Scatter Plot](https://raw.githubusercontent.com/Kamalabot/M3nD3/main/ScatterPlot.html)
+2. [Bar Chart](https://raw.githubusercontent.com/Kamalabot/M3nD3/main/barChart.html)
