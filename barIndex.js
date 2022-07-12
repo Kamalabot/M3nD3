@@ -12,7 +12,7 @@ const fetchData = async(url) =>{
     return await response.text()
 };
 
-fetchData(inetSpace).then(data =>{
+fetchData(SpaceTitanic).then(data =>{
     const spaced = aq.fromCSV(data)
     dataWrangle(spaced);
 });
