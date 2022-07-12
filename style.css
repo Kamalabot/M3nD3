@@ -2,6 +2,7 @@ body {
   margin: 0;
   overflow-y: scroll;
 }
+
 circle {
   fill: red;
   opacity: 0.5;
@@ -20,10 +21,7 @@ text {
   stroke: #C0C0BB;
 }
 
-.axis-label {
-  font-size: 3em;
-  fill: #8E8883;
-}
+
 .title {
   font-size: 3.7em;
   fill: #635F5D;
