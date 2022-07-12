@@ -1,37 +1,14 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/Kamalabot/M3nD3/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## M3nD3
+Me and D3... 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Repo that hosts my list of projects on Data Visualisation, Java Script, CSS and HTML
 
-### Markdown
+Fascination with charts that change at a click of mouse has been a driving force, culminating into this Repo. Central work will be implementing 
+many of the charts and visuals in plain HTML using D3 and Javascript. Supporting libraries like Arquero, Vega also be used for adding data, and 
+needed variety for the visualisation tasks, and goals.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Vision is to build cool visuals and data explorations out there. It all begins with the humble
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Kamalabot/M3nD3/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+1. [Scatter Plot](https://github.com/Kamalabot/M3nD3/blob/main/ScatterPlot.html)
+2. [Bar Chart](https://github.com/Kamalabot/M3nD3/blob/main/barChart.html)
