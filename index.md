@@ -1,4 +1,7 @@
-# M3nD3
+
+## M3nD3
+Me and D3... 
+
 Repo that hosts my list of projects on Data Visualisation, Java Script, CSS and HTML
 
 Fascination with charts that change at a click of mouse has been a driving force, culminating into this Repo. Central work will be implementing 
