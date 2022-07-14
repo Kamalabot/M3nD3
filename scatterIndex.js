@@ -75,7 +75,7 @@ function dataVis(entry){
         .tickSize(-innerWidth)
         .tickPadding(10);
 
-        const marks = entry.map(d =>({
+    const marks = entry.map(d =>({
         x: xScale(xVals(d)),
         y: yScale(yVals(d)),
         p_y: yVals(d),

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Axes Types</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/d3@7.6.1/dist/d3.min.js"></script>
+</head>
+<body>
+    <div>
+        <h1>The Scaling Challenge</h1>
+        <p>There are many scales onto which the data can be mapped. On these scales the axes depends. Whether top or left the 
+            axes needs tick marks and values. For that scales come in handy.</p>
+        <p>
+            If visualization is constructing “visual representations of abstract data to amplify cognition”, then perhaps
+             the most important concept in D3 is the scale, which maps a dimension of abstract data to a visual variable.
+                                                                                - Mike Bostock
+        </p>
+        <p> Learning to use the Scale effectively is more important than placing the points on the chart. I have decided to master the 
+            scales first, followed by the ticks formating, then color scaling. All these are done practically to implement day to day 
+            visualization at the beginner level.
+        </p>
+    </div>
+    <div>
+        <h1>
+            Here are the list of Problems faced and Solved?
+        </h1>
+        <ul>
+            <li>Locating the X-axis at the bottom of the SVG </li>
+            <p>Issue here was the green rectangles were translated to the very bottom of the g element that was created. 
+                When the x-axis was attached, it went out of the view. The solution was to bring up the SVG element and leave a 
+            margin below. </p>
+            <li>Formating the ticks of the time scales</li>
+            <p>Formating is straight forward by using d3.format("%a"). Challenge arose in using the correct function to call the format.
+                tickFormat(d3.format()) chaining to d3.axisBottom() turned out to be the correct way. D3's help was not clear in this regard
+            </p> 
+            <li>Positioning the Ordinal ticks along the X-axis</li>
+            <p>Again the help for the Ordinal function was bit opaque, especially when it comes to assigning the range. 
+                The range in other scales are [start, stop]. For ordinal [each ordinal point has seperate stop]. The solution is to create
+                custom range using the map() function. 
+            </p>
+            <li>Automating the positioning of the SVGs on the page</li>
+            <p>I wanted to automate the design of the webpage and make it beautiful and usable at the same. 
+                D3 gives the necessary tools for shapes, colors while JS gives the looping abstraction necessary for populating
+                the shapes and colors.
+            </p>
+        </ul>
+        <p>The chart area will be colored green</p>
+    </div>
+    <script src="otherAxes.js"></script>
+</body>
+</html>

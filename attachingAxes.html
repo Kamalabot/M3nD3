@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Attaching Challenge </title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/arquero@5.0.0/dist/arquero.min.js"></script>
+    <script src="https://unpkg.com/d3@7.6.1/dist/d3.min.js"></script>
+</head>
+<body>
+    <div>
+        <h1>The Challenge</h1>
+        <p>The page was born out of my frustration in understanding how the axes were 
+            rendered and then appended onto the SVG and the HTML page.
+        </p>
+    </div>
+    <div>
+        <h1>
+            How it is addressed?
+        </h1>
+        <p>
+            Learning to place elements inside a 'chart area'. That is where it begins. 
+            There are many parts to a chart, like the axis, legends, marks or the actual visual. 
+            These are attached to the chart part by part.
+
+            The elements are first appended to a g element, and the g element is appended to 
+            the main chart. This lead me to create rectangles of different colors for each part
+            of the visual, and then render rectangles first.
+        </p>
+        <p>
+            These elements can be placed in many ways on the html webpage.
+            Below the SVG is directly appended to the body of the html page. On that SVG 
+            element, the axes are attached. 
+        </p>
+        <p>The color green shows where the data points on the chart will be rendered.
+            Chart area will decide how the points are scaled on the chart area. Yellow area shown 
+            below is where the X-axis will get rendered.
+            
+            The script associated with this page has the xAxisG.call(xAxis) commented out. Run the 
+            page by removing the comment in a live-server the change can be seen... 
+        </p>
+    </div>
+    <script src="attachingAxes.js"></script>
+</body>
+</html>
