@@ -12,5 +12,17 @@ Vision is to build cool visuals and data explorations out there. It begins with 
 
 1. [Creating part of Chart](/attachingAxes.html)
 2. [Exploring the Scales in D3](/otherAxes.html)
-3. [Scatter Plot](/ScatterPlot.html)
-4. [Bar Chart](/barChart.html)
+3. [Playing with Data](/playData.html)
+4. [Scatter Plot](/ScatterPlot.html)
+5. [Bar Chart](/barChart.html)
+
+
+
+### Rendering on Local machine
+- Install npm 
+- Check npm is up and running using npm -v command on your terminal (cmd/sh/ps)
+- Install live-server using the command npm i -g live-server (-g flag for global installation)
+- cd into the directory where the html and js files are located
+- Type live-server in the terminal  
+- Webserver with the files in the current directory will open up
+- Open the HTML file that you want to view.

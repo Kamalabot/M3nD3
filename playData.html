@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Play Data</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js"></script>
+</head>
+<body>
+    <div>
+        <h1>Smear the Data</h1>
+        <p>Power of D3 lies in creating and positioning the SVG elements like Circles, rectangles and paths. Select, Join, Merge, Enter, Exit
+            and Update are the methods that draw the data on html page from the data. These methods allow the creativity of the individual 
+            to show.  
+        </p>
+        <p>
+           Visualisation contains data, marks, scales, signals and channels. This page will contain only the marks. The marks are given 
+           importance over the data. What these marks will show? Anything!!!, kind of Pixel Art with D3 and JS functions. Ready!!  
+        </p>
+    </div>
+    <div>
+        <h1>
+            Challenges Circumvented!!
+        </h1>
+        <ul>
+            <li>Creating Data</li>
+            <p>This page is about many different types of shapes that needs to be generated on the page automatically. There 
+                will be Challenges in getting the shapes. I will document them, as I encounter in the JS itself. Some of the 
+                shapes I am thinking of are 
+                <ol>
+                    <li>Slanting line from Left to Right downwards</li>
+                    <li>Slanting line from Left to Right downwards</li>
+                    <li>Stair Case</li>
+                    <li>Concentric Circles</li>
+                    <li>Cross hair</li>
+                </ol> 
+            </p>
+            <li>Creating multiple shapes in same SVG</li>
+            <p>I had started by complicating the data by categorising into Circle, lines, curves so on..
+                D3 thinks all points same, it doesn't know which point belongs to which set of data. If I give it 
+                a set of data, it will render it. array1.concat(array2) came to rescue where multiple lines or curves came
+                into picture
+            </p> 
+            <li>Creating Circles</li>
+            <p>Class tenth Geometry. x = radius * sin(angle) y = radius * cos(angle) 
+                Concentric circles were simply concatenated together.</p>
+            <li>Creating Stair Case</li>
+            <p>It is multiple sets of straight horizontal and vertical lines. Learned how the Array concatenation along 
+                with multiple loops works. </p>
+            <li>Creating Cross Hair</li>
+            <p>A bit more involved with maps and filters. Ideas is still concatenation of  
+                the points that make the straight lines in the design. Some points will be omitted from the array.
+            </p>
+        </ul>
+        <p>The show down is when the DOM is used to create transition between all these data points in single SVG using D3.</p>
+    </div>
+    <script src="playData.js"></script>
+</body>
+</html>
