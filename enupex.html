@@ -12,15 +12,29 @@
 <body>
     <h1>How the enter, update and exit works</h1>
     <div>
-        <h3>Entering the shapes</h3>
-        <p></p>
+        <h3>Join API</h3>
+        <p>The shape can enter the chart through enter and update functions, and the exit function removes the unncessary shapes.
+            The below visual shows the same. There are many random points to begin with. 
+            
+            Once you click the The real data buttom, the number of lynx trapped Vs the Year data populates. It is only 20 points.
+            As the transition begins on the circles, we can see the unwanted circles removed from the SVG. This is due to the usage 
+            of join clause.
+        </p>
+    </div>
+    <div>
+        <h3>Random Data button not functioning multiple times</h3>
+        <p>After the document loads the random data button function only once, and real data button also had same issue. 
+        </p>
+    </div>
+    <div><button id="random">randomData</button>
+        <button id="real">realData</button>
     </div>
     <svg width="300" height="300"></svg>
     <div>
         <h3>Click the button and append</h3>
         <p>With the call back show, and d3.select appending the p element to body was straight forward</p>
     </div>
-    
+
     </div>
     <script src="enupex.js"></script>
 </body>
