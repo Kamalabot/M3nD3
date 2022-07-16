@@ -7,6 +7,7 @@
 const SpaceTitanic = 'SpaceTitanic.csv'; //Referring the dataset of interest
 const inetSpace = 'https://gist.githubusercontent.com/Kamalabot/e61b849cc5297aeabd51eeafdcd717e6/raw/fb7a0142c71a204e619fbf4fc58bdc626c4342ca/SpaceTitanic.csv'
 
+
 const fetchData = async(url) =>{
     const response = await fetch(url);
     return await response.text()
@@ -14,7 +15,9 @@ const fetchData = async(url) =>{
 
 fetchData(SpaceTitanic).then(data =>{
     const spaced = aq.fromCSV(data)
+
     dataWrangle(spaced);
+
 });
 
 function dataWrangle(data){
@@ -48,8 +51,9 @@ function dataWrangle(data){
         .dedupe('familyName')
         .orderby(aq.desc('familySpend'))
     const wrangled = filterFam.objects() //converting to simple arrays and feed it to charting.
-
     dataViz(wrangled.slice(0,10))
+    return wrangled;
+
 }
 
 function dataViz(entryData){
@@ -117,7 +121,7 @@ function dataViz(entryData){
     g.selectAll('rect')
         .data(data)
         .join('rect')
-        .attr('class','mark')
+        .attr('class','box')
         .attr('x', d => xScale(xFam(d)))
         .attr('y',d => yScale(ySpend(d)))
         .attr('height', d => 460 -yScale(ySpend(d)))
@@ -129,3 +133,65 @@ function dataViz(entryData){
         .attr('y', -10)
         .text("This is one heck of a Bar Chart")
 }
+//The below async and await methods needs to be learnt more throughly
+
+let cliker = document.querySelector('button')
+
+// const temp = async () =>{
+//         console.log('clicked')
+//         await d3.dsv(",", inetSpace,(d)=>{
+//             return d
+//         });
+//     }
+cliker.addEventListener('click',newText)
+
+function newText(){
+    d3.csv('Lynx_trapped.csv',data => {
+        //console.log(data);
+        var textAppend = d3.select('svg')
+            
+        textAppend.selectAll('text')
+            .data(data)
+            .join('text')
+            .text(d => d)
+    })
+}
+
+let fifteen = Promise.resolve(15);
+fifteen.then(value => console.log(`got ${value}`))
+console.log(fifteen) //this will be just the promise, not the value
+
+//creating generators
+function* powers(n) {
+    for (let current = n;; current *= n) {
+      yield current;
+    }
+  }
+  
+for (let power of powers(3)) {
+    if (power > 50) break;
+    console.log(power);
+  }
+// function putText(){
+    
+//     const fetchData = async(url) =>{
+//         const response = await fetch(url);
+//         return await response.text()
+//     };
+    
+//     fetchData(SpaceTitanic).then(data =>{
+//         const spaced = aq.fromCSV(data)
+    
+//         var getT = dataWrangle(spaced)
+        
+//         console.log(getT)
+    
+//     var textIng = d3.select('svg')
+//         .append('g')
+//     textIng.selectAll('p')
+//         .data(getT)
+//         .enter()
+//         .append('p')
+//         .html(d => d)
+//     });
+// }

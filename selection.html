@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Learning to Bind Data</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="libraries/d3.js"></script>
+    <script src="libraries/arquero.js"></script></head>
+
+<body>
+    <h1>Selections and Data Binding</h1>
+    <div>
+        <h3>Appending the text to the body</h3>
+        <p>Not much of an issue, did that as you can find the value 600960 below</p>
+        <h3>Click the button and append</h3>
+        <p>With the call back show, and d3.select appending the p element to body was straight forward</p>
+    </div>
+    <div>
+        <button>GetData</button>
+    </div>
+    <svg height="200" width="360"></svg>
+    <div>
+        <h3>Attaching text to HTML Body</h3>
+        <p>There are wrong ways to pull the data inside the scope. Chief among them is the following. This returns individual objects.
+            It creates multiple DOM elements as in d3.select() command. 
+        </p>
+           <pre>
+                d3.csv('cities.csv', (e, d)=>{
+                console.log(e) //output the objects one by one
+                console.log(d) //provides the counts of the object
+            })</pre>
+            <p>Here is another rookie error. This will raise an async error, since await has to be inside the async call</p>
+            <pre>                
+                const data = await d3.dsv(",", "cities.csv", (d) => {
+                    return {
+                    year: new Date(+d.x, 0, 1), // convert "Year" column to Date
+                    make: d.label,
+                    model: d.Populations,
+                    };
+                });
+            </pre>
+            <p>The correct method is as below. This provides you the data in array format, with objects as elements.</p>
+            <pre>
+                d3.csv("/path/to/file.csv").then((data) => {
+                    console.log(data); // [{"Hello": "world"}, …]
+                  });
+            </pre>
+            After resolving the data ingestion, populating the text on to the SVG and the DOM was straight forward. 
+        </p>
+    </div>
+    <div>
+        <h3>Populating a Table with d3</h3>
+        <p>Aim of the datavis is to achieve perception not just understanding. I personally tend to look at the numbers, even though the 
+            visualisation can provide better understanding. That lead me to try binding the data to table. Here is something that I found.</p>
+        <pre>
+            function makeTable(data){
+                var myTable = d3.select('body')
+                    .append('div')
+                    .attr('class','tbl')
+                    .append('table')
+                    .selectAll('tr')
+                    .data(data)
+                    .enter()
+                    .append('tr')
+                    
+                myTable.append('td')
+                    .text(d => d.Year)
+                // myTable.selectAll('tr')
+                //     .data(data)
+                    
+                myTable.append('td')
+                    .text(d => d.lynx_trapped)
+            }
+        </pre>
+    </div>
+    <script src="selection.js"></script>
+</body>
+
+</html>

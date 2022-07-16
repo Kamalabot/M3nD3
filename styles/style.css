@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
 body {
   margin: 0;
   overflow-y: scroll;
@@ -9,7 +12,7 @@ body {
 }
 
 li {
-  list-style-image: url("images/icon-plus.png");
+  list-style-image: url("../images/icon-plus.png");
   line-height: 1.6em;}
 table {
   border-spacing: 0px;}
@@ -73,8 +76,8 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 0.2em;}
 p {
-  font-family: Arial, Verdana, sans-serif;
-  line-height: 1.4em;
+  font-family: sans-serif;
+  line-height: 1em;
   color: #665544;}
 p.intro:first-line {
   font-weight: bold;}
@@ -93,10 +96,18 @@ circle {
 
 text {
   font-family: sans-serif;
+  font-weight: bold;
+  font-size: medium;
+  color: #665544;
 }
-
+div {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: medium;
+  color: #665544;
+}
 .tick text {
-  font-size: 2em;
+  font-size: 1.2em;
   fill: #635F5D;
 }
 
