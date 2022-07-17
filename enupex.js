@@ -13,9 +13,12 @@ function printD(data){
         .attr("cx", (d ,i) => i * 10)
         .attr("cy", d => height - +d.lynx_trapped / 100)
         .attr('r', 5)
-    main.selectAll('text')
+    main.selectAll('text').remove()
+    main.append('g')
+        .selectAll('text')
         .data(data)
         .join('text')
+        .attr('transform', `translate(200,10)`)
         .attr('y', (d, i) => i * 15)
         .text(d => `${d.Year} , ${d.lynx_trapped}`)
 }
@@ -29,22 +32,24 @@ const realPop = () =>{
 var realB = document.getElementById("real")
 realB.addEventListener('click',realPop)
 
-var ranData = d3.range(50).map(d =>({
-    x: Math.round(150 * Math.random()),
-    y: Math.round(150 * Math.random())
-}))
 //Fuction that works on random data
-const ranPop = (data) =>{
-    console.log('recieved')
+const ranPop = () =>{
+
+    var ranData = d3.range(50).map(d =>({
+        x: Math.round(150 * Math.random()),
+        y: Math.round(150 * Math.random())
+    }))
+
     main.selectAll("circle")
-        .data(data)
+        .data(ranData)
         .join("circle")
         .attr("cx", d => d.x)
         .attr("cy", d => d.y)
         .attr('r', 5)
+    main.selectAll('text').remove()
     main.append('g')
         .selectAll('text')
-        .data(data)
+        .data(ranData)
         .join("text")
         .attr('transform', `translate(200,10)`)
         .attr('y', (d, i) => i * 15)
@@ -52,4 +57,4 @@ const ranPop = (data) =>{
 }
 
 var ranB = document.getElementById('random');
-ranB.addEventListener('click',ranPop(ranData))
+ranB.addEventListener('click',ranPop)

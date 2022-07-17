@@ -22,8 +22,10 @@
         </p>
     </div>
     <div>
-        <h3>Random Data button not functioning multiple times</h3>
-        <p>After the document loads the random data button function only once, and real data button also had same issue. 
+        <h3>Text was getting over written after every click of the button</h3>
+        <p>Text data is populated using the the D3 select method, when the function is called by the button click. The number of text values 
+            entering the context is same everytime. The join api cannot remove the nodes that it can bind to the data. Due to this, the 
+            seperate remove() needs to be added 
         </p>
     </div>
     <div><button id="random">randomData</button>

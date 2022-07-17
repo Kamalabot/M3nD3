@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Python Data Science Libraries</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="libraries/d3.js"></script>
+    <script src="libraries/arquero.js"></script>
+</head>
+
+<body>
+    <h1>Python Libraries for Data Science</h1>
+    <div>
+        <p>Libraries solve the problems that we face on daily basis. Every problem has many different solutions.
+            Python libraries are the hallmark of such varied solutions, that has been implemented by different
+            programmers
+            all around the world.
+            The internet is filled with cookbooks, reciepes and code snippets.
+        </p>
+    </div>
+    <div>
+        <h2>Python libraries Syntax</h2>
+        <p>Single Page to Learn and understand what a library is about and its basic syntax followed by the link that
+            takes you to the
+            libraries main page.
+        </p>
+        <h3>Cleaning the Data using Map function</h3>
+        <pre>
+            var decorData = data.map((frag) =>({
+                title:frag.topic_head.replace("_", " ").replace("/",""),
+                desc: (frag) =>{
+                    let temp = frag.data.replace('['," ").replace(']',"");
+                    return temp.split(',').join('\n')
+                },  
+                code: frag.code.replace('\n',"\r")
+            }))
+        </pre>
+        <p>The above code using map function doesn't execute as intended. The aim is to clean the 
+            description by removing the square brackets, and add the space.
+        </p>
+        <h3>Cleaning using the for-each loop</h3>
+        <pre>
+            function cleanData(dataPoint){
+                dataPoint.code = dataPoint.code.replace(/(\r\n|\n|\r)/gm,"\r")
+                dataPoint.topic_head = dataPoint.topic_head.replace("_", " ").replace("/","");
+                let t = dataPoint.data.replace('['," ").replace(']',"");
+                dataPoint.data = t.split(',').join('\n')
+            }
+        </pre>
+        <p>The above function works in cleaning the data on the fly. The replace function for removing 
+            the line breaks and carriage returns has to be regex 
+        </p>
+        <h3>Regex for removing the \n</h3>
+        <pre>
+            dataPoint.code
+            .replace(/(\\n)/gm,"")
+            .split(',')
+            .join('\n')
+        </pre>
+        <p>Using the global and multiline modifier in the replace 
+            function helped to remove the \n characters. Even then
+            there are still remaining characters that are unwanted. 
+        </p>
+        <button id="getData">Click to see</button>
+    </div>
+    <script src="pythonlibraries.js"></script>
+</body>
+
+</html>

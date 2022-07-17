@@ -1,0 +1,21 @@
+1: Scales including the color scale, quantile scale, band scale
+2: Automatic transition with setTimeout and other mechanisms
+3: barchart tutorial completion
+4: bringing menus on the chart and interaction
+5: Creating legends and chart interaction
+6: Charting the world map with the data points
+7: Working on various types of charts
+    a: treemap
+    b: clustermap
+    c: Force directed Graphs
+    d: Stack chart
+    e: Sankey charts
+    f: Voronoi 
+    g: Cartograms
+    h: Hexbins
+8: Building layouts from scratch
+9: Bringing in data from Python
+9: Building the final dashboards
+10: Integrating the real world kaggle, regular datasets for visualisations
+11: Building a portfolio
+    a: Build a single page app with all the listed Python libraries in one place
