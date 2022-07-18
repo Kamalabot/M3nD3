@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        rect {
+            fill: hotpink;
+        }
+        text{
+            fill: black;
+        }
+        h1, h2, h3, a {
+            font-weight: normal;
+            color: #0088dd;
+            margin: 0px;}
+        h1 {
+            font-family: Georgia, Times, serif;
+            font-size: 250%;
+            padding-bottom: 10px;
+        }
+    </style>
+    <script src="libraries/d3.js"></script>
+</head>
+<body>
+    <h1>Attaching the signals to the Marks</h1>
+    <p>Ease of making the visualisation depends on how the components are attached. Using the g element
+     for positioning the axis, the text on the visualisation, the tool tips, colors and finally the transitions is important.
+     Chart is made of multiple marks. These marks need signals. When it comes to attaching the signals, the challenge arises.
+
+     g element positioning is done automatically by d3, when it is attached to the shapes / marks created by selectAll method. 
+     We see the bar chart from Bostock's tutorial. I have tried to place the rectangle in place of the signals. 
+
+     It seems the rect element is not changing color with class assignment. The way CSS works is also important for getting the
+     position of the signals. Graph shows the new rect element attached to the g element which is attached to the parent SVG element.
+     The fill color of the  
+    </p>
+    <svg class="stud"></svg>
+    <script>
+        var main = d3.select('stud')
+            .append('svg');
+
+        var y = d3.scaleLinear().range([500,0]);
+        
+        d3.tsv('data.tsv').then((data)=>{
+            console.log(data)
+            var m = d3.max(data, d => d.value)
+            //this way of chaining is acceptable
+            y.domain([0, m])
+            console.log(y(0.586))
+            //trying to attach individual g to rect
+            main.selectAll('rect')
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('x', (d, i) => i * 32)
+                .attr('height',d => 500 - y(d.value))
+                .attr('y',d => y(d.value))
+                .attr('width', 30)
+        const gR = d3.select('svg').append('g')
+                .attr('fill','green')
+                .append('rect')
+                .attr('x', 100)
+                .attr('height',50)
+                .attr('y',100)
+                .attr('width', 30)    
+            //Forget text append rectangles
+            // gR.append('rect')
+            //     .attr('x', 10)
+            //     .attr('y', 450)
+            //     .attr('width','5')
+            //     .attr('height','5')
+                
+    })
+    </script>
+</body>
+</html>

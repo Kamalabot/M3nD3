@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Understanding Selection and Transitions</title>
+    <style>
+        rect {
+            fill: hotpink;
+        }
+
+        text {
+            fill: black;
+            size: 32px;
+            font: bold 48px monospace;
+        }
+
+        .enter {
+            fill: #333
+        }
+
+        .update {
+            fill: red
+        }
+        .exit{
+            fill:darkorange;
+        }
+
+        h1,
+        h2,
+        h3,
+        a {
+            font-weight: normal;
+            color: #0088dd;
+            margin: 0px;
+        }
+
+        h1 {
+            font-family: Georgia, Times, serif;
+            font-size: 250%;
+            padding-bottom: 10px;
+        }
+    </style>
+    <script src="libraries/d3.js"></script>
+</head>
+
+<body>
+    <h1>Lets start with Select</h1>
+    <p>Mike explains how the Select function works in D3 with in-detail <a
+            href="https://bost.ocks.org/mike/selection/">explanation</a>. This page will incorporate those
+        ideas
+        for future reference. As I continue reading, I will make notes of important links and points as list below.
+    </p>
+    <p>The below svg is having three activities ongoing. The three are showing how the enter, update and exit works. The color 
+        of the letter tells whether it is being updated, exited or is newly entered. The color coding is done by changing the 
+        class attribute. 
+    </p>
+    <svg class="stud"></svg>
+    <ul>
+        <li>you won’t often use native methods as D3 provides convenient alternatives, such as selection.each.
+            (A few native methods are overridden to adapt their behavior to selections, namely selection.filter and
+            selection.sort.)</li>
+
+        <li>Selections are  are arrays of arrays of elements: a selection is an array of groups, and each group is an array of
+            elements. For example, d3.select returns a selection with one group containing the selected element:</li>
+        <pre>
+            var selection = d3.select("body");
+            </pre>
+        <li>every element in the old selection becomes a group in the new selection; each group contains an old
+            element’s matching descendant elements. So, if each table cell contained a span element, and you called
+            selectAll a third time, you’d get a selection with sixteen groups. There are parent nodes for each group
+            of selections. The ultimate parent is the document element.</li>
+        <pre>d3.selectAll("tr").selectAll("td").selectAll("span");</pre>
+        <li>When you search for document element in the MDN you will find the following</li>
+        <pre>
+            const rootElement = document.documentElement;
+            const firstTier = rootElement.childNodes;
+            // firstTier is a NodeList of the direct children of the root element
+            // such as <head> and <body>
+
+            for (const child of firstTier) {
+            // do something with each direct child of the root element
+            }
+        </pre>
+        <p>Try opening the document.documentElement in the console. The entire page will be inside the console.</p>
+        <li>Thing to keep in mind is, a selection.attr or selection.style, the function is called for each element; the
+            main difference with grouping is that the second argument to your function (i) is the within-group index
+            rather than the within-selection index.</li>
+        <li>Null elements can occur when selection.select cannot find a matching element for the given selector. The
+            select method must preserve the grouping structure, so it fills the missing slots with null. This where the
+            enter and exit function comes into play. </li>
+        <strong>data is not a property of the selection, but a property of its elements.</strong>
+        <li>Data can be assigned to DOM by using selection.data / selection.datum or via insert, append and select.
+            If we now append an element to the body, the child automatically inherits data from the parent
+        </li>
+        <pre>
+            document.body.__data__ = 43;
+            is idiomatic with 
+            d3.select('body').datum(42)
+        </pre>
+        <li> Your data function is passed the datum of the group’s parentNode (d) and
+            the group’s index (i), and returns whatever array of data you want to join to that group.</li>
+        <p>Using the key function...</p>
+        <pre>
+            function name(d) {
+                return d.name;
+              } // equivalent to d => d.name
+
+              d3.selectAll('div').data(letters, name);
+        </pre>
+        <strong>But what happens when there’s no matching element for a given datum, or no matching datum for a given
+            element?</strong>
+        <p> there are three possible logical outcomes:</p>
+        <pre>
+            Update - There was a matching element for a given datum.
+            Enter - There was no matching element for a given datum.
+            Exit - There was no matching datum for a given element.
+        </pre>
+    </ul>
+    <p>Following that a series of tutorials on General update pattern is shared by Mike after he explains the selection
+    </p>
+    <ul>
+        <li><a href="https://bl.ocks.org/mbostock/3808218">GUP1</a></li>
+        <li><a href="https://bl.ocks.org/mbostock/3808221">GUP2</a></li>
+        <li><a href="https://bl.ocks.org/mbostock/3808234">Update Transitions</a></li>
+    </ul>
+    <pre>
+        d3.select('body')
+            .selectAll('div')
+            .data([1,5,5,7,9])
+            .enter()
+            .append('div')
+            .text(str => str)
+    </pre>
+    <ul>
+        <li>What is functor</li>
+        <pre>
+                function functor(x) {
+                return function() {
+                    return x;
+                };
+                }
+                // and what it does?
+                var val = functor(10);
+                // val is now a function that
+                // always returns 10
+                assert.equal(val(), 10);
+        </pre>
+    </ul>
+    <script>
+        var width = 960;
+        var height = 500;
+        var main = d3.select('.stud')
+            .attr('height', height)
+            .attr('width', width)
+        var g = main.append('g')
+            .attr('transform', `translate(${width / 8},250)`)
+
+        //svg is created. follow that by creating the 'g' elements
+        var inData = 'abcdefghijklmnopqrstuvwxyz'.split("")
+        function update(alphabets) {
+            var text = g.selectAll('text')
+                .data(alphabets)
+                
+            text.attr('class', 'update')
+            
+            text.enter().append('text')
+                .attr('class', 'enter')
+                .attr('x', (d, i) => i * 32)
+                .attr('dy', "0.6em")
+                .style('background', 'blue')
+                .merge(text)
+                .text(d => d)
+            text.exit().remove()
+        }
+        update(inData)
+        d3.interval(() => { update(d3.shuffle(inData).slice(0, Math.floor(Math.random() * 26)).sort()) }, 1500)
+        //using interval to update
+        var gT = main.append('g')
+                .attr('transform', `translate(${width / 8},350)`)
+
+        function transit(alphabets) {            
+            var t = d3.transition()
+                .duration(750);
+
+            // JOIN new data with old elements.
+            var textT = gT.selectAll("text")
+                .data(alphabets, (d) => d);
+
+            // EXIT old elements not present in new data.
+            textT.exit()
+                .attr("class", "exit")
+                .transition(t)
+                .attr("y", 60)
+                .style("fill-opacity", 1e-6)
+                .remove();
+
+            // UPDATE old elements present in new data.
+            textT.attr("class", "update")
+                .attr("y", 0)
+                .style("fill-opacity", 1)
+                .transition(t)
+                .attr("x", (d, i) => i * 32);
+
+            // ENTER new elements present in new data.
+            textT.enter().append("text")
+                .attr("class", "enter")
+                .attr("dy", ".35em")
+                .attr("y", -60)
+                .attr("x", function(d, i) { return i * 32; })
+                .style("fill-opacity", 1e-6)
+                .text((d) => d)
+                .transition(t)
+                .attr("y", 0)
+                .style("fill-opacity", 1);
+            }
+        transit(inData)
+        d3.interval(() => { transit(d3.shuffle(inData).slice(0, Math.floor(Math.random() * 26)).sort()) }, 1500)
+
+        var gU = main.append('g')
+            .attr('transform', `translate(${width / 8},150)`)
+
+        //svg is created. follow that by creating the 'g' elements
+        function updateG(alphabets) {
+            var textG = gU.selectAll('text')
+                .data(alphabets, (d) => d)
+                
+            textG.attr('class', 'update')
+            
+            textG.enter().append('text')
+                .attr('class', 'enter')
+                .attr('dy', "0.6em")
+                .text(d => d)
+                .merge(textG)
+                .attr('x', (d,i) => i * 32)
+            
+            textG.exit().remove()
+            }
+        updateG(inData)
+        d3.interval(() => { updateG(d3.shuffle(inData).slice(0, Math.floor(Math.random() * 26)).sort()) }, 1500)
+        //using interval to update
+    </script>
+</body>
+
+</html>

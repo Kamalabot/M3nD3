@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Learning from Bostock</title>
+    <style>
+        text {
+            fill: black;
+            size: 10px;
+            text-anchor: middle;
+        }
+        .chart text{
+            stroke: green;
+        }
+        g{
+            fill: #0088dd;
+        }
+        h1,
+        h2,
+        h3,
+        a {
+            font-weight: normal;
+            color: #0088dd;
+            margin: 0px;
+        }
+
+        h1 {
+            font-family: Georgia, Times, serif;
+            font-size: 250%;
+            padding-bottom: 10px;
+        }
+    </style>
+    <script src="libraries/d3.js"></script>
+</head>
+
+<body>
+    <h1>Tearing Down the Domino</h1>
+    <p>Self Learning is a very creative process. Having a master who created what you want to 
+        learn is very important. First start by tearing apart what master has created, so you can 
+        put together better than him. 
+
+        D3 involves CSS/ HTML and JS. The relationship between these three can become very 
+        complex. If we change even one aspect of what the master has done, then many things can 
+        break. So learning is art of tearing down the domino without letting it collapse
+    </p>
+    <h2>Lessons learnt till now</h2>
+    <ul>
+        <li>Style sheet attributes takes precedence over the local attributes</li>
+        <li>g-element attr takes precedence over the local element attribute</li>
+        <li>Class attr takes precedence over the element attribute</li>
+        <p>Give the element color fill manually when creating them with d3</p>
+        <li>Create individual g-element for the data. Consider it like a object container</li>
+        <li>Attach all the marks and signals to the g-element</li>
+    </ul>
+    <svg class="chart"></svg>
+    <script>
+        var width = 960,
+            height = 500;
+
+        var y = d3.scaleLinear()
+            .range([height, 0]);
+
+        //rangeBands are included from the IIIB tutorial
+        var x = d3.scaleOrdinal()
+            .rangeBands([0,960], 0.1)
+
+        var chart = d3.select(".chart")
+            .attr("width", width)
+            .attr("height", height);
+
+        d3.tsv("data.tsv").then((data) =>{
+            y.domain([0, d3.max(data, function (d) { return d.value; })]);
+            x.domain(data.map((d) => d.name))
+            console.log(data.map((d) => d.name))
+            var barWidth = width / data.length;
+
+            var bar = chart.selectAll("g")
+                .data(data)
+                .enter().append("g")
+                .attr("transform", function (d, i) { return "translate(" + i * barWidth + ",0)"; })
+                
+//making the stroke blue with attribute
+            bar.append("rect")
+                .attr("y", function (d) { return y(d.value); })
+                .attr("height", function (d) { return height - y(d.value); })
+                .attr("width", barWidth - 1);
+//trying to append rect element to g element. The fill color will be 
+//referred from the CSS only, then the local g-element is given priority
+            bar.append("rect")
+                .attr("x", 1)
+                .attr("y", function (d) { return y(d.value) + 3; })
+                .attr("height", 15)
+                .attr('width',barWidth - 1)
+                .attr('fill','pink')
+
+            bar.append("text")
+                .attr("x", barWidth / 2)
+                .attr("y", function (d) { return y(d.value) + 3; })
+                .attr("dy", ".75em")
+                .text(function (d) { return d.value; });
+        });
+
+        function type(d) {
+            d.value = +d.value; // coerce to number
+            return d;
+        }
+
+    </script>
+</body>
+
+</html>

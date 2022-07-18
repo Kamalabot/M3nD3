@@ -103,6 +103,6 @@ const render = (inData) =>{
         
     //calling the axes on to the chart
 
-    xAxisG.call(xAxis)
+    //xAxisG.call(xAxis)
     yAxisG.call(yAxis)
 }

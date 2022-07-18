@@ -135,7 +135,7 @@ function dataViz(entryData){
 }
 //The below async and await methods needs to be learnt more throughly
 
-let cliker = document.querySelector('button')
+var cliker = document.getElementById('klik')
 
 // const temp = async () =>{
 //         console.log('clicked')
@@ -145,15 +145,18 @@ let cliker = document.querySelector('button')
 //     }
 cliker.addEventListener('click',newText)
 
+//corrected the below function to use then correctly
 function newText(){
-    d3.csv('Lynx_trapped.csv',data => {
-        //console.log(data);
+    console.log('data');
+    d3.csv('Lynx_trapped.csv').then((data) => {
+        
         var textAppend = d3.select('svg')
             
         textAppend.selectAll('text')
             .data(data)
             .join('text')
-            .text(d => d)
+            .text(d => d.Year)
+            .attr('y', (d, i) => i * 10 )
     })
 }
 
@@ -172,26 +175,5 @@ for (let power of powers(3)) {
     if (power > 50) break;
     console.log(power);
   }
-// function putText(){
-    
-//     const fetchData = async(url) =>{
-//         const response = await fetch(url);
-//         return await response.text()
-//     };
-    
-//     fetchData(SpaceTitanic).then(data =>{
-//         const spaced = aq.fromCSV(data)
-    
-//         var getT = dataWrangle(spaced)
-        
-//         console.log(getT)
-    
-//     var textIng = d3.select('svg')
-//         .append('g')
-//     textIng.selectAll('p')
-//         .data(getT)
-//         .enter()
-//         .append('p')
-//         .html(d => d)
-//     });
-// }
+
+//Following the bostock bar chart tutorial

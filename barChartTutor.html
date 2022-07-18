@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        .chart div {
+            font: 10px sans-serif;
+            background-color: springgreen;
+            text-align: middle;
+            padding: 3px;
+            margin: 1px;
+            color: rebeccapurple;
+        }
+        rect {
+            color: hotpink;
+        }
+        text{
+            color: aquamarine;
+        }
+    </style>
+    <script src="libraries/d3.js"></script>
+    <script src="libraries/arquero.js"></script>
+</head>
+<body>
+    <div class="chart"></div>
+    <svg width="300" height="500"></svg>
+    <script>
+        var dat = [86, 5, 75, 98, 52]
+        var s = d3.scaleLinear()
+            .range([0,300])
+            .domain([5,98])
+        d3.select('.chart')
+            .selectAll('div')
+            .data(dat)
+            .join('div')
+            .style('width',d => s(d) + "px")
+            .text(d => d)
+        //Bar that is correct
+        var bar = d3.select('svg')
+            .append('g')
+            .selectAll('rect')
+            .data(dat)
+            .join('rect')
+            .attr('width',10)
+            .attr("y",d => 500 - d)
+            .attr("x",(d,i) => i * 15)
+            .attr("height",500)
+        //text of the bar chart
+        bar.append('text')
+            .attr("y",d => d - 10)
+            .attr('x',(d,i) => i * 15)
+            .text(d => d)
+
+        d3.select('svg')
+            .append('g')
+            .selectAll('rect')
+            .data(dat)
+            .join('rect')
+            .attr('width',10)
+            .attr("y",0)
+            .attr("x",(d,i) => i * 15)
+            .attr("height",d => 450 - d)
+    </script>
+</body>
+</html>
