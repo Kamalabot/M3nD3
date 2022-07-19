@@ -1,7 +1,7 @@
 //loading the visual after the page is loaded
 window.addEventListener('load',(e)=>{
-    console.log(e)
-    console.log('hi')
+    //console.log(e)
+    //console.log('hi')
     //create a svg element mimicing the charts
     const heightCh = 350;
     const widthCh = 400;
@@ -14,13 +14,14 @@ window.addEventListener('load',(e)=>{
     var base = d3.select('body')
         .append('g')
     //Refactoring the code will be easier
-    const appendBox = (chart) =>{
+    const appendBox = (chart, ind) =>{
         chart.append('rect')
             .attr('x',marginCh.left)
             .attr('y',marginCh.bottom)
             .attr('height',rectL)
             .attr('width',rectB)
-            .attr('class','box')    
+            .attr('class',`box`)
+            .attr('id',`id${ind}`)    
     }
     //Plan is to create multiple SVG chart areas one after the other. The base will remain the parent, while the other svg charts with axes will 
     //be acting as simple children
@@ -35,19 +36,19 @@ window.addEventListener('load',(e)=>{
     //     .attr('height',rectL)
     //     .attr('width',rectB)
     //     .attr('class','box')
-    chartOne.call(appendBox)
+    chartOne.call(appendBox,1)
 
     var chartTwo = base.append('svg')
         .attr('height',heightCh)
         .attr('width',widthCh)
         .attr('transform','translate(20,0)')
-    chartTwo.call(appendBox)
+    chartTwo.call(appendBox,2)
     
     var chartThree = base.append('svg')
         .attr('height',heightCh)
         .attr('width',widthCh)
         .attr('transform','translate(20,0)')
-    chartThree.call(appendBox)
+    chartThree.call(appendBox,3)
     
     data = d3.range(5).map(i => ({
         x: widthCh * Math.random(),
@@ -56,15 +57,16 @@ window.addEventListener('load',(e)=>{
         c: Math.floor(20 * Math.random())
       }))
     console.log(data[0])
-    var chartGrid = d3.range(6).map((g) =>({
+    var chartGrid = d3.range(6).map((g,i) =>({
         chart: base.append('svg')
+            .attr('id',`svg${i}`)
             .attr('height',heightCh)
             .attr('width',widthCh)
             .attr('transform','translate(20,0)')
     }));
-    
-    chartGrid.forEach((e) =>{
-        e.chart.call(appendBox)
+    //need a way to reach the rectangles... 
+    chartGrid.forEach((e, i) =>{
+        e.chart.call(appendBox, i)
     })
 
     var timeFormat = d3.utcFormat("%I %p")
@@ -113,4 +115,55 @@ window.addEventListener('load',(e)=>{
 
     xOrdG.call(xOrd)
 
+    //adding scaleBand() 
+
+    var xBand = d3.scaleBand()
+        .domain(["one","two","three","four"])
+        .range([0, rectL])
+        .paddingOuter(0.15)
+
+    var xPand = d3.scaleBand()
+        .domain(["one","two","three","four"])
+        .range([0, rectL])
+        .paddingInner(0.2)
+
+    var xB = d3.axisBottom(xBand).ticks(4)
+    //console.log(chartGrid[0["chart"]])
+    const xBg = d3.select("#svg0").append('g')
+        .attr('transform',`translate(${marginCh.left},${rectL + marginCh.top})`)
+    bars(xBand,'svg0')
+    console.log(xBand('three'))
+    xBg.call(xB)
+
+    const xPad = d3.select("svg1").append('g')
+        .attr('transform',`translate(${marginCh.left},${rectL + marginCh.top})`)
+    bars(xPand,'svg1')
+
+    console.log(xPand.step())
+    //below function is used for creating the rectangles
+    function bars(scale, cls) {
+      var indRect = d3.select(`#${cls}`)
+        .append('g')
+        .attr('transform',`translate(${marginCh.left},${marginCh.top})`)
+      indRect.append('rect')
+        .attr('x',scale('one'))
+        .attr('width',scale.bandwidth())
+        .attr('height',rectL)
+        .attr('fill',"orange")
+      indRect.append('rect')
+        .attr('x',scale('two'))
+        .attr('width',scale.bandwidth())
+        .attr('height',rectL)
+        .attr('fill',"yellow")
+      indRect.append('rect')
+        .attr('x',scale('three'))
+        .attr('width',scale.bandwidth())
+        .attr('height',rectL)
+        .attr('fill',"blue")
+      indRect.append('rect')
+        .attr('x',scale('four'))
+        .attr('width',scale.bandwidth())
+        .attr('height',rectL)
+        .attr('fill',"black")
+    }
 })

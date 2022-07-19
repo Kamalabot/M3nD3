@@ -22,7 +22,7 @@
     </div>
     <div>
         <h1>
-            Here are the list of Problems faced and Solved?
+            Here are the list of Problems faced and Solved
         </h1>
         <ul>
             <li>Locating the X-axis at the bottom of the SVG </li>
@@ -41,7 +41,34 @@
             <li>Automating the positioning of the SVGs on the page</li>
             <p>I wanted to automate the design of the webpage and make it beautiful and usable at the same. 
                 D3 gives the necessary tools for shapes, colors while JS gives the looping abstraction necessary for populating
-                the shapes and colors.
+                the shapes and colors. Following is the code for the same
+            </p>
+            <pre>
+                var chartGrid = d3.range(6).map((g) =>({
+                    chart: base.append('svg')
+                        .attr('height',heightCh)
+                        .attr('width',widthCh)
+                        .attr('transform','translate(20,0)')
+                }));            
+            </pre>
+            <li>How to reach the svg elements that are inside an Array?</li> 
+               <p>Idea taken from <a href="https://stackoverflow.com/questions/2753732/how-to-access-svg-elements-with-javascript">here</a>
+                Give an "id" to the array of svgs. Then use the ids to select the svg you want 
+            </p>
+            <pre>
+                var chartGrid = d3.range(6).map((g,i) =>({
+                    chart: base.append('svg')
+                        .attr('id',`svg${i}`)
+                        .attr('height',heightCh)
+                        .attr('width',widthCh)
+                        .attr('transform','translate(20,0)')
+                }));
+            </pre>
+           <li>How to visualise the Band scale on the svgs?</li>
+            <p>In observable you can find a very colorful tutorial on the scales
+                that explains the various nuances of the scales <a href="https://observablehq.com/@d3/d3-scaleband">here</a>.
+                Attaching rectangles to multiple SVGs in the page is trivial. More interesting challenge 
+                was locating the rectangles, which the scaleBand() itself did exactly as it is done in observable...
             </p>
         </ul>
         <p>The chart area will be colored green</p>

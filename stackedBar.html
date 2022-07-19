@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Stack to Group Bars Transition</title>
+    <style>
+        .axis .domain {
+             display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="libraries/d3.js"></script>
+</head>
+
+<body>
+    <h1>Collapsing the Stacks of Bars into Groups</h1>
+    <p>Three actions will be taking place in this example. Stacked bar chart will be created, followed by
+        creating the grouped bar chart and then transitioning between the two type of chart. There will be
+        many interlocking components. Following blocks by Mike will be referred. Data for the chart is taken 
+        cityPopulation.csv 
+    </p>
+    <ul>
+        <li><a href="https://bl.ocks.org/mbostock/3886208">Stacked Bar</a></li>
+        <li><a href="https://bl.ocks.org/mbostock/882152">Grouped Bar</a></li>
+        <li><a href="http://bl.ocks.org/mbostock/3943967">Stacked to GroupedBar Transition</a></li>
+        <li><a href="https://bl.ocks.org/mbostock/3887051">Updated Grouped Bar</a></li>
+        Some miscellaneous blocks for study
+        <li><a href="https://bl.ocks.org/mbostock/b5935342c6d21928111928401e2c8608">Stacked Negative Values</a></li>
+        <li><a href="https://bl.ocks.org/mbostock/4062085">Population Pyramid</a></li>
+        <li><a href="https://bl.ocks.org/mbostock/6fead6d1378d6df5ae77bb6a719afcb2">Radial Stacked bar</a></li>
+        <li><a href="https://bl.ocks.org/mbostock/30195632">Conventional Margins</a></li>
+    </ul>
+    <p>
+    <p>Below is the list of D3 libraries used to implement the charts</p>
+    <pre>
+        d3-dsv - load and parse data
+        d3-scale - x- and y-position, and color encoding
+        d3-format - SI prefix formatting (e.g., “10M” for 10,000,000)
+        d3-array - compute simple statistics (e.g., max)
+        d3-axis - display axes
+        d3-shape - computed stacked positions
+    </pre>
+    <p>One of the challenges I faced was having different styles needed across different charts that is created. The base style of the 
+        page is imported through the style.css file outside the page. While the style specific to the charts and page are created using 
+        the <!-- <style> --> tag.
+    </p>
+    <h3>How to wrangle the data as it is imported using d3.csv</h3>
+    <pre>
+        function wrangle(d, i, columns){
+            console.log(d) //this is the entire row
+            console.log(i) // index of the row
+            console.log(columns) // columns headers are already seperated 
+            for (i = 1, t = 0; i < columns.length; ++i){
+                d[columns[i]] = +d[columns[i]] //converting the cell vals to numbers
+                t += d[columns[i]]
+                d.total = t
+            }
+            return d
+        }    
+        //bringing in the data
+        d3.csv("cityPopulation.csv", wrangle).then((data) =>{
+            console.log(data)
+        })
+    </pre>
+    <p>The complex charts are created as layouts in D3. Stack chart is one such 
+        complex chart. The rectangles has to be placed on top of the other, and 
+        their size needs to be modified based on the scale. Following is the 
+        main script part that makes the data ready for stacking.
+    </p>
+    <pre>
+        .data(d3.stack().keys(keys)(data))
+    </pre>
+    <p>Two more notable commands were the following. They 
+        show how important is to know the data structures
+    </p>
+    <pre>
+        keys.slice().reverse() reversing the keys to append it to chart
+        y(y.ticks().pop()) getting the top most value of the scale
+    </pre>
+    <svg height="500" width="960" class="exTab"></svg>
+    <script src="stackedBar.js"></script>
+</body>
+
+</html>

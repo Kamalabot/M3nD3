@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Group Bars</title>
+    <style>
+        .axis .domain {
+             display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="libraries/d3.js"></script>
+</head>
+
+<body>
+    <h1>Creating Grouped Bar Charts</h1>
+    <p>Grouping the bars under one category is a different problem. 
+        This page shows how that is being solved.  
+    </p>
+    <p>
+    <p>Below is the list of D3 libraries used to implement the charts</p>
+    <pre>
+        d3.csv - load and parse data
+        d3.scaleOrdinal - x-position encoding and color encoding
+        d3.scaleLinear - y-position encoding
+        d3.format - SI prefix formatting (e.g., “10M” for 10,000,000)
+        d3.max - compute domains
+        d3.keys - compute column names
+        d3.svg.axis - display axes
+    </pre>
+    <p>One of the challenges I faced was having different styles needed across different charts that is created. The base style of the 
+        page is imported through the style.css file outside the page. While the style specific to the charts and page are created using 
+        the <!-- <style> --> tag.
+    </p>
+    <ul>
+        <li>How to create domain in single line?</li>
+        <pre>y.domain([0, d3.max(data, (d) => d3.max(keys, (key)=> d[key]))]).nice()</pre>
+        <li>How the scaleBand is workin?</li>
+        <p>Learning the mechanism the scale was positioning the shapes on the svg made
+            the understanding of grouped bar chart easier.
+        </p>
+    </ul>
+    <svg height="500" width="960" class="exTab"></svg>
+    <script src="groupedBar.js"></script>
+</body>
+
+</html>
