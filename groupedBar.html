@@ -39,7 +39,26 @@
         <p>Learning the mechanism the scale was positioning the shapes on the svg made
             the understanding of grouped bar chart easier.
         </p>
+        <li>Debugging the nested g-element translating to the local coordinate
+            of the parent g-element?
+        </li>
+        <p>g elements acts as a box or container for moving the entire set of shapes
+            on the svg. In the case of grouped chart, the child g used for the combined
+            bar chart was not translating.
+            After analysing the code, I had not converted the population values into 
+            numbers after importing the data. After checking the places where the numbers 
+            are used, and coercing them to integers the graph renders properly.
+            The function to convert the entering data into numbers is 
+            <pre>
+                function convertNum(d, i, columns) {
+                    //d is the rows, i is rowIndex and rows' columns
+                    for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
+                    return d;
+                }
+            </pre> 
+        </p>
     </ul>
+    <h3>Next is combining the grouped and stacked chart with transitions!!!</h3>
     <svg height="500" width="960" class="exTab"></svg>
     <script src="groupedBar.js"></script>
 </body>

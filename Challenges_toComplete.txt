@@ -1,4 +1,7 @@
 1: Scales including the color scale, quantile scale, band scale
+    bandScale is done.
+    colorScale is implemented with the bars function in bandScale
+    Create legends in the seperate panels.
 2: Automatic transition with setTimeout and other mechanisms
 3: barchart tutorial completion
 4: bringing menus on the chart and interaction
@@ -19,3 +22,11 @@
 10: Integrating the real world kaggle, regular datasets for visualisations
 11: Building a portfolio
     a: Build a single page app with all the listed Python libraries in one place
+
+12: Work on making the webpages a single page application
+13: Find visualisation challenges and solve them. Or create new visualisation 
+challenges 
+14: Bring real-time data and create visualisation that keep 
+changing on the webPage.
+    a) New github repo created?
+    b) Number of searches made in Google...

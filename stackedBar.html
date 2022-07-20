@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>Stack to Group Bars Transition</title>
+    <title>Stack Bars</title>
     <style>
         .axis .domain {
-             display: none;
+            display: none;
         }
     </style>
     <link rel="stylesheet" href="styles/style.css">
@@ -13,25 +13,17 @@
 </head>
 
 <body>
-    <h1>Collapsing the Stacks of Bars into Groups</h1>
-    <p>Three actions will be taking place in this example. Stacked bar chart will be created, followed by
-        creating the grouped bar chart and then transitioning between the two type of chart. There will be
-        many interlocking components. Following blocks by Mike will be referred. Data for the chart is taken 
-        cityPopulation.csv 
+    <h1>Aiming Stacks to Groups transition</h1>
+    <p>Inspired by the transition in this <a href="http://bl.ocks.org/mbostock/3943967">block</a>, I had created this
+        study page. What is required to transit between 2 states? No, not the algorithm or the interface to make the
+        transition, but the states themselves.
+        As a beginner in D3, it is challenging to come up with a decent and simple bar chart. One can aim higher or
+        dream bigger. To get there is different
     </p>
-    <ul>
-        <li><a href="https://bl.ocks.org/mbostock/3886208">Stacked Bar</a></li>
-        <li><a href="https://bl.ocks.org/mbostock/882152">Grouped Bar</a></li>
-        <li><a href="http://bl.ocks.org/mbostock/3943967">Stacked to GroupedBar Transition</a></li>
-        <li><a href="https://bl.ocks.org/mbostock/3887051">Updated Grouped Bar</a></li>
-        Some miscellaneous blocks for study
-        <li><a href="https://bl.ocks.org/mbostock/b5935342c6d21928111928401e2c8608">Stacked Negative Values</a></li>
-        <li><a href="https://bl.ocks.org/mbostock/4062085">Population Pyramid</a></li>
-        <li><a href="https://bl.ocks.org/mbostock/6fead6d1378d6df5ae77bb6a719afcb2">Radial Stacked bar</a></li>
-        <li><a href="https://bl.ocks.org/mbostock/30195632">Conventional Margins</a></li>
-    </ul>
-    <p>
-    <p>Below is the list of D3 libraries used to implement the charts</p>
+    <p>After understanding how to create the <a href="https://kamalabot.github.io/M3nD3/barChartTutor_b.html">bars</a>,
+        stacks(this page) and <a href="https://kamalabot.github.io/M3nD3/groupedBar.html">grouped bars</a>. Transition is
+        tackled in <a href="https://kamalabot.github.io/M3nD3/stackedGroup.html">stacked to group bars</a>.
+    </p>
     <pre>
         d3-dsv - load and parse data
         d3-scale - x- and y-position, and color encoding
@@ -40,9 +32,12 @@
         d3-axis - display axes
         d3-shape - computed stacked positions
     </pre>
-    <p>One of the challenges I faced was having different styles needed across different charts that is created. The base style of the 
-        page is imported through the style.css file outside the page. While the style specific to the charts and page are created using 
-        the <!-- <style> --> tag.
+    <p>One of the challenges I faced was having different styles needed across different charts that is created. The
+        base style of the
+        page is imported through the style.css file outside the page. While the style specific to the charts and page
+        are created using
+        the
+        <!-- <style> --> tag.
     </p>
     <h3>How to wrangle the data as it is imported using d3.csv</h3>
     <pre>
@@ -62,15 +57,15 @@
             console.log(data)
         })
     </pre>
-    <p>The complex charts are created as layouts in D3. Stack chart is one such 
-        complex chart. The rectangles has to be placed on top of the other, and 
-        their size needs to be modified based on the scale. Following is the 
+    <p>The complex charts are created as layouts in D3. Stack chart is one such
+        complex chart. The rectangles has to be placed on top of the other, and
+        their size needs to be modified based on the scale. Following is the
         main script part that makes the data ready for stacking.
     </p>
     <pre>
         .data(d3.stack().keys(keys)(data))
     </pre>
-    <p>Two more notable commands were the following. They 
+    <p>Two more notable commands were the following. They
         show how important is to know the data structures
     </p>
     <pre>

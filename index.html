@@ -3,6 +3,22 @@
 
 <head>
     <meta charset="UTF-8">
+    <style>
+        .container {
+        position: relative;
+        overflow: hidden;
+        padding-top: 35%;
+        }
+
+        .container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        }
+    </style>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
 </head>
@@ -10,9 +26,17 @@
 <body>
     <a class="github-fork-ribbon" href="https://github.com/Kamalabot/M3nD3/" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
     <h1>M3nD3</h1>
-    <p>g
-        Me and D3...
+    <p>
+        Me and D3...Inspired by Learn Python the Hard Way.
+        Hold on! What Python? You mean the Programming Language? </p>
+    <p>
+    Yep. I have taken the same approach 
+        <a href="https://www.goodreads.com/book/show/8341335-learn-python-the-hard-way">Zed Shaw</a> 
+        outlined in his book for learning D3. And, it turned out super awesome  
     </p>
+    <div class="container">
+    <iframe src="/showBar.html"></iframe>
+    </div>
     <p>
         Repo that hosts my list of projects on Data Visualisation, Java Script, CSS and HTML
     </p>
@@ -71,13 +95,20 @@
             <li><a href="https://kamalabot.github.io/M3nD3/enupex.html">Enter Update and Exit Operations</a></li>
             <li><a href="https://kamalabot.github.io/M3nD3/playData.html">Playing with Data</a></li>
             <li><a href="https://kamalabot.github.io/M3nD3/ScatterPlot.html">Scatter Plot</a></li>
+            <li><a href="https://kamalabot.github.io/M3nD3/stackedGroup.html">Bar Transitions</a></li>
+            <li><a href="https://kamalabot.github.io/M3nD3/groupedBar.html">Grouped Bar Chart</a></li>
+            <li><a href="https://kamalabot.github.io/M3nD3/stackedBar.html">Stacked Bar Chart</a></li>
             <li><a href="https://kamalabot.github.io/M3nD3/barChart.html">Bar Chart</a></li>
         </ul>
     </div>
     <div>
-        <h2>Projects on Automating HTML creation with D3 </h2>
+        <h2>Projects on Automating HTML creation</h2>
+        <p>JQuery and D3 are used for automating the content and element placement. Any new libraries used will be updated here.
+            The library source files are located in the repo itself, and linked on the page headers.
+        </p>
         <ol>
             <li><a href="https://kamalabot.github.io/M3nD3/pythonlibraries.html">Populating the Python Library data on Single page Using D3</a></li>            
+            <li><a href="https://kamalabot.github.io/M3nD3/blocksD3.html">Blocks of D3</a></li>
         </ol>
     </div>
     <div>
@@ -96,6 +127,20 @@
             <li><a href="https://kamalabot.github.io/M3nD3/unD3r_selection.html">Selection and Transition In-Detail</a></li>
             <li><a href="https://kamalabot.github.io/M3nD3/joinTransitions.html">Thinking in Joins Transitions</a></li>            
         </ol>
+        <p>Some charts that give more insights into the work of D3, which I have coded again 
+            and tried to come up with common pitfalls, lessons learnt in the following pages.
+        </p>
+        <ul>
+            <li><a href="https://bl.ocks.org/mbostock/3886208">Stacked Bar</a></li>
+            <li><a href="https://bl.ocks.org/mbostock/882152">Grouped Bar</a></li>
+            <li><a href="http://bl.ocks.org/mbostock/3943967">Stacked to GroupedBar Transition</a></li>
+            <li><a href="https://bl.ocks.org/mbostock/3887051">Updated Grouped Bar</a></li>
+            Some miscellaneous blocks for study
+            <li><a href="https://bl.ocks.org/mbostock/b5935342c6d21928111928401e2c8608">Stacked Negative Values</a></li>
+            <li><a href="https://bl.ocks.org/mbostock/4062085">Population Pyramid</a></li>
+            <li><a href="https://bl.ocks.org/mbostock/6fead6d1378d6df5ae77bb6a719afcb2">Radial Stacked bar</a></li>
+            <li><a href="https://bl.ocks.org/mbostock/30195632">Conventional Margins</a></li>
+        </ul>    
     </div>
     <div>
         <h3> How to render the files Local machine </h3>

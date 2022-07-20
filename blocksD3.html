@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Blocks of D3</title>
+    <style>
+        form {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            position: absolute;
+        }
+
+        label {
+            display: block;
+        }
+
+        .blocks {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            height: 600px;
+            overflow: auto;
+        }
+
+        .block {
+            display: block;
+            width: 200px;
+            min-width: 200px;
+            border: 1px solid black;
+            margin: 5px;
+            padding: 20px
+        }
+    </style>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="./libraries/d3.js"></script>
+    <script src="./libraries/jquery.js"></script>
+</head>
+
+<body>
+    <h1>Bringing the Blocks to Life</h1>
+
+    <p>Blockbuilder was an in-browser code editor that expanded into a data visualization search engine
+        that hosted rich dataset and visualisation of over 40,000 examples.They were indexed by the 
+        project over 5 years. Thanks to Ian for sharing the details of the files and the associated
+    json stored in cloud over <a href="https://observablehq.com/@enjalot/blockbuilder-search-data">this</a>notebook
+    at observablehq</p>
+
+    <h2>Why bring the Blocks to life?</h2>
+    <p>The visualisation with D3 has history of 10 years, and before that it was Protovis. What we see today is observablehq.
+        Observablehq is an awesome tool. For new learners of visualisation like us, who intend to understand what observable 
+        is doing behind the scenes. I wanted to see the examples that <a href="https://bl.ocks.org/curran">Curran</a>
+        and <a href="https://bl.ocks.org/mbostock">Bostock</a> had created before Observablehq. These blocks were purely 
+        interacting with the html document elements, and Javascript used was simple and straightforward    
+    </p>
+    <h2>Did you find the blocks using this Page?</h2>
+    <p>Nope, I had browsed the blocks at <a href="https://bl.ocks.org/">bl.ocks.org</a> and learnt about the various introductory
+    tutorial Bostock had created. After that I came across the following files that has all the blocks that were created by 
+    various industry veterans for the past 10 years</p>
+    <h2>What links are your talking about?</h2>
+    <ul>
+        <li><a href="https://storage.googleapis.com/bb-search-data/parsed/blocks-min.json">7 mb file</a></li>
+        <li><a href="https://storage.googleapis.com/bb-search-data/parsed/blocks-colors.json">File with colors parsed</a></li>
+        <li><a href="https://storage.googleapis.com/bb-search-data/parsed/blocks-api.json">D3 functions are counted</a></li>
+        <li><a href="https://storage.googleapis.com/bb-search-data/parsed/files-light.csv">Contents of the Gist minimal</a></li>
+        <li><a href="https://storage.googleapis.com/bb-search-data/parsed/files-blocks.json">Contents of the Gist maximum</a></li>
+        <li><a href="https://storage.googleapis.com/bb-search-data/parsed/blocks.json ">Untouched Blocks JSON</a></li>
+    </ul>
+    <h2>What can I do with the above files?</h2>
+    <p>Play with it. The files are having live data inside it which can be populated on to the html page using Jquery, 
+        Javascript and D3. I have populated some parts of the data below. Think about some interesting ways to populate the 
+        data in the html page. Or use the Ian's notebook as starting point and do some different analysis. Then port that 
+        analysis to regular html page. 
+    </p>
+    <div class="blocks"></div>
+    <script>
+        fetch("https://storage.googleapis.com/bb-search-data/parsed/blocks-min.json?")
+            .then(response => response.json())
+            .then(data => {
+                reqData = data.filter(d => !!d.thumbnail && d.description).slice(100, 200).map(d => ({
+                    desc: d.description,
+                    id: d.id,
+                    user: d.userId,
+                    thumb: d.thumbnail,
+                }))
+                console.log(reqData)
+                for (let d of reqData) {
+                    $(".blocks").append(
+                        `<div> 
+                            <p>${d.desc}</p>
+                            <p>by ${d.user} ${d.id}</p>
+                            <img src = ${d.thumb} width = 200px>
+                        </div>`
+                    )
+                }
+            }).catch(error => { return error; })
+    </script>
+</body>

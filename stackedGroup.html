@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bars Transition</title>
+    <style>
+        form {
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          position: absolute;
+        }
+
+        label {
+          display: block;
+        }
+        
+    </style>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="libraries/d3.js"></script>
+</head>
+<body>
+    <h1>Collapsing the Stacks of Bars into Groups</h1>
+    <p>Three actions will be taking place in this example. Stacked bar chart will be created, followed by
+        creating the grouped bar chart and then transitioning between the two type of chart. There will be
+        many interlocking components.Thinking of extending this example to include Histograms of the categories...
+    </p>
+    <h2>Transition has start and the end states, and a trigger that initiates it</h2>
+    <p>
+        The transition itself has not meaning without the starting and the ending. 
+        The code has to tell that state.One issue I faced was using the "this.parentNode" 
+        with arrow function "=>" doesn't work. 
+    </p>
+    <h2>Why the chart go above the frame?</h2>
+    <p> Because the "y" attribute gets set to 0 or undefined value. In the svg the 0 is at the top of the 
+        page. When the scales are computing these values, such issues always occur. Especially
+    when you type the code.</p>
+    <h2>Why color scheme schemeCategory20c is considered as null?</h2>
+    <p>D3 library is continuously updated, so the recent ver 7.0 doesnt have this color scheme.
+        In its place, many other other <a href="https://github.com/d3/d3-scale-chromatic">color schemes</a>
+        like schemeSet1, schemePaired, schemeAccent have been introduced. I have chosen the schemeTableau10
+        for this visualisation.
+    </p>
+    <h2>What to do when the visuals don't appear</h2>
+    <p>Debug by opening the Developer tools, and checking the elements.By looking
+        at the elements, the kind of error can be easily understood. If there is no elements
+        at all, then probably you did not include the .data(yourData) command in the selectAll
+        method.
+    </p>
+    <form>
+        <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+        <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+    </form>
+    <svg height="500" width="960"></svg>
+    <script src="stackedGroup.js"></script>
+</body>
+
+</html>
