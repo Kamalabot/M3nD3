@@ -1,7 +1,6 @@
 1: Scales including the color scale, quantile scale, band scale
     bandScale is done.
     colorScale is implemented with the bars function in bandScale
-    Create legends in the seperate panels.
 2: Automatic transition with setTimeout and other mechanisms
 3: barchart tutorial completion
 4: bringing menus on the chart and interaction
@@ -30,3 +29,6 @@ challenges
 changing on the webPage.
     a) New github repo created?
     b) Number of searches made in Google...
+15: Create an interactive chart where the change in a variable affects 
+many other variables, like https://www.nytimes.com/interactive/2014/upshot/buy-rent-calculator.html
+16: Refactor the code as much as possible... keep refactoring

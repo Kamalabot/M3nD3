@@ -19,6 +19,9 @@
             scales first, followed by the ticks formating, then color scaling. All these are done practically to implement day to day 
             visualization at the beginner level.
         </p>
+        <p>Scales are transformed into the axis and used in the legends, when it comes to categories. The legends are further used for 
+            creating transitions, and making highlights on the charts.
+        </p>
     </div>
     <div>
         <h1>
@@ -70,9 +73,17 @@
                 Attaching rectangles to multiple SVGs in the page is trivial. More interesting challenge 
                 was locating the rectangles, which the scaleBand() itself did exactly as it is done in observable...
             </p>
+            <li>How to import the function into my script? I am getting reference error for require</li>
+            <p>Browser must know that the script you are importing is a module. This is done by adding the "type = module" attribute
+                in the script tag, as done in this page. If the script is used in node environment, then package.json file has the 
+                config stating the scripts are module types.
+            </p>
+            <li>Appending series of squares to the existing svg</li>
+            In order to show the quantile, quantize and threshold scale in action, it is better to have a grid of squares. 
+            That is what I am building for the svg 5 and 6
         </ul>
         <p>The chart area will be colored green</p>
     </div>
-    <script src="otherAxes.js"></script>
+    <script type="module" src="otherAxes.js"></script>
 </body>
 </html>
