@@ -1,11 +1,6 @@
 1: Scales including the color scale, quantile scale, band scale
-    bandScale is done.
-    colorScale is implemented with the bars function in bandScale
-2: Automatic transition with setTimeout and other mechanisms
-3: barchart tutorial completion
-4: bringing menus on the chart and interaction
+Understanding the scales are done...
 5: Creating legends and chart interaction
-6: Charting the world map with the data points
 7: Working on various types of charts
     a: treemap
     b: clustermap
@@ -15,6 +10,10 @@
     f: Voronoi 
     g: Cartograms
     h: Hexbins
+2: Automatic transition with setTimeout and other mechanisms
+4: bringing menus on the chart and interaction
+
+6: Charting the world map with the data points
 8: Building layouts from scratch
 9: Bringing in data from Python
 9: Building the final dashboards
@@ -32,3 +31,6 @@ changing on the webPage.
 15: Create an interactive chart where the change in a variable affects 
 many other variables, like https://www.nytimes.com/interactive/2014/upshot/buy-rent-calculator.html
 16: Refactor the code as much as possible... keep refactoring
+
+17: There is a dialemma. To learn D3 fast, I have to learn Plot. Not required... If I learn the transforms,  layouts, 
+scales, colors.... hold on.

@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Axes Types</title>
     <link rel="stylesheet" href="styles/style.css">
     <script src="libraries/d3.js"></script>
-    <script src="libraries/arquero.js"></script></head>
+    <script src="libraries/arquero.js"></script>
+</head>
+
 <body>
     <div>
         <h1>The Scaling Challenge</h1>
-        <p>There are many scales onto which the data can be mapped. On these scales the axes depends. Whether top or left the 
+        <p>There are many scales onto which the data can be mapped. On these scales the axes depends. Whether top or
+            left the
             axes needs tick marks and values. For that scales come in handy.</p>
         <p>
-            If visualization is constructing “visual representations of abstract data to amplify cognition”, then perhaps
-             the most important concept in D3 is the scale, which maps a dimension of abstract data to a visual variable.
-                                                                                - Mike Bostock
+            If visualization is constructing “visual representations of abstract data to amplify cognition”, then
+            perhaps
+            the most important concept in D3 is the scale, which maps a dimension of abstract data to a visual variable.
+            - Mike Bostock
         </p>
-        <p> Learning to use the Scale effectively is more important than placing the points on the chart. I have decided to master the 
-            scales first, followed by the ticks formating, then color scaling. All these are done practically to implement day to day 
+        <p> Learning to use the Scale effectively is more important than placing the points on the chart. I have decided
+            to master the
+            scales first, followed by the ticks formating, then color scaling. All these are done practically to
+            implement day to day
             visualization at the beginner level.
         </p>
-        <p>Scales are transformed into the axis and used in the legends, when it comes to categories. The legends are further used for 
+        <p>Scales are transformed into the axis and used in the legends, when it comes to categories. The legends are
+            further used for
             creating transitions, and making highlights on the charts.
         </p>
     </div>
@@ -29,21 +37,26 @@
         </h1>
         <ul>
             <li>Locating the X-axis at the bottom of the SVG </li>
-            <p>Issue here was the green rectangles were translated to the very bottom of the g element that was created. 
-                When the x-axis was attached, it went out of the view. The solution was to bring up the SVG element and leave a 
-            margin below. </p>
+            <p>Issue here was the green rectangles were translated to the very bottom of the g element that was created.
+                When the x-axis was attached, it went out of the view. The solution was to bring up the SVG element and
+                leave a
+                margin below. </p>
             <li>Formating the ticks of the time scales</li>
-            <p>Formating is straight forward by using d3.format("%a"). Challenge arose in using the correct function to call the format.
-                tickFormat(d3.format()) chaining to d3.axisBottom() turned out to be the correct way. D3's help was not clear in this regard
-            </p> 
+            <p>Formating is straight forward by using d3.format("%a"). Challenge arose in using the correct function to
+                call the format.
+                tickFormat(d3.format()) chaining to d3.axisBottom() turned out to be the correct way. D3's help was not
+                clear in this regard
+            </p>
             <li>Positioning the Ordinal ticks along the X-axis</li>
-            <p>Again the help for the Ordinal function was bit opaque, especially when it comes to assigning the range. 
-                The range in other scales are [start, stop]. For ordinal [each ordinal point has seperate stop]. The solution is to create
-                custom range using the map() function. 
+            <p>Again the help for the Ordinal function was bit opaque, especially when it comes to assigning the range.
+                The range in other scales are [start, stop]. For ordinal [each ordinal point has seperate stop]. The
+                solution is to create
+                custom range using the map() function.
             </p>
             <li>Automating the positioning of the SVGs on the page</li>
-            <p>I wanted to automate the design of the webpage and make it beautiful and usable at the same. 
-                D3 gives the necessary tools for shapes, colors while JS gives the looping abstraction necessary for populating
+            <p>I wanted to automate the design of the webpage and make it beautiful and usable at the same.
+                D3 gives the necessary tools for shapes, colors while JS gives the looping abstraction necessary for
+                populating
                 the shapes and colors. Following is the code for the same
             </p>
             <pre>
@@ -54,9 +67,10 @@
                         .attr('transform','translate(20,0)')
                 }));            
             </pre>
-            <li>How to reach the svg elements that are inside an Array?</li> 
-               <p>Idea taken from <a href="https://stackoverflow.com/questions/2753732/how-to-access-svg-elements-with-javascript">here</a>
-                Give an "id" to the array of svgs. Then use the ids to select the svg you want 
+            <li>How to reach the svg elements that are inside an Array?</li>
+            <p>Idea taken from <a
+                    href="https://stackoverflow.com/questions/2753732/how-to-access-svg-elements-with-javascript">here</a>
+                Give an "id" to the array of svgs. Then use the ids to select the svg you want
             </p>
             <pre>
                 var chartGrid = d3.range(6).map((g,i) =>({
@@ -67,23 +81,40 @@
                         .attr('transform','translate(20,0)')
                 }));
             </pre>
-           <li>How to visualise the Band scale on the svgs?</li>
+            <li>How to visualise the Band scale on the svgs?</li>
             <p>In observable you can find a very colorful tutorial on the scales
-                that explains the various nuances of the scales <a href="https://observablehq.com/@d3/d3-scaleband">here</a>.
-                Attaching rectangles to multiple SVGs in the page is trivial. More interesting challenge 
+                that explains the various nuances of the scales <a
+                    href="https://observablehq.com/@d3/d3-scaleband">here</a>.
+                Attaching rectangles to multiple SVGs in the page is trivial. More interesting challenge
                 was locating the rectangles, which the scaleBand() itself did exactly as it is done in observable...
             </p>
             <li>How to import the function into my script? I am getting reference error for require</li>
-            <p>Browser must know that the script you are importing is a module. This is done by adding the "type = module" attribute
-                in the script tag, as done in this page. If the script is used in node environment, then package.json file has the 
+            <p>Browser must know that the script you are importing is a module. This is done by adding the "type =
+                module" attribute
+                in the script tag, as done in this page. If the script is used in node environment, then package.json
+                file has the
                 config stating the scripts are module types.
             </p>
             <li>Appending series of squares to the existing svg</li>
-            In order to show the quantile, quantize and threshold scale in action, it is better to have a grid of squares. 
-            That is what I am building for the svg 5 and 6
+            <p>
+                In order to show the quantile, quantize and threshold scale in action, it is better to have a grid of
+                squares.
+                That is what I am building for the svg 5 and 6</p>
+            <li>How did you bring all those squares on top of the green rectangles?</li>
+            <p>I am importing the squares function from squares.js file and attaching it to the SVGs that is created
+                earlier. The method of
+                coloring the squares has been delegated to the quantile, quantize and the threshold scales. The idea of
+                representing the
+                scales using squares was taken from <a href="https://observablehq.com/d/5725b7e6a1395d4e">here</a>. Even
+                though the method used to
+                create them is different from how guys at observable has done that.</p>
+            <li>Is there a way to create those squares without D3?</li>
+            <p>There is JQuery, and other frameworks like angular that can append the shapes to the DOM elements. I have explored that 
+               <a href="https://kamalabot.github.io/M3nD3/blocksD3.html">here</a> using the data on a json data </p>
         </ul>
-        <p>The chart area will be colored green</p>
+        <p>The chart area will be colored green.</p>
     </div>
     <script type="module" src="otherAxes.js"></script>
 </body>
+
 </html>

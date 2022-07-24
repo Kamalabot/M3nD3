@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>From Observable with Love</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="libraries/d3.js"></script>
+    <script src="libraries/arquero.js"></script>
+</head>
+    <div>
+        <h1>Dialemma</h1>
+        <p>The above streamGraph is embedded by importing the code from Observable Notebooks. Observable has done a good
+            job <a href="https://observablehq.com/d/5b53c1798a0495b1">Introducing Embedding</a>. The advanced techniques
+            of
+            embedding is shown <a
+                href="https://observablehq.com/@observablehq/advanced-embeds?collection=@observablehq/embed-trail">here</a>.
+            For me, most important was to know how the code interacted with plain html page, and directly with JS
+            runtime. Yep, it does. Observable
+            has created their own <a href="https://github.com/observablehq/runtime">Runtime library</a> which can be
+            accessed through cdn or via npm.</p>
+        <p>Dialemma was whether to use Observable for creating the visualisations or not? Yes, Dialemma is resolved
+            today. The answer is resounding
+            <strong>YES</strong>. There are many advantages in creating @Observable and then move it raw html web page.
+        </p>
+        
+        <p>In order to learn fast there needs to be fast feedback. I had taken this detour because building the inputs
+            on the
+            html page and getting the values from those inputs require a lot of boilerplate code. The easiest option is
+            using
+            document.queryselector functions or use the JQuery methods. Observable Runtime library automates this entire 
+            process and lets us create the inputs and reference them easily with their "View of" function. As I understood 
+            how observable exposes their Notebooks and their individual cells easily with their runtime <a href="https://github.com/observablehq/inspector">inspector API</a>  
+        </p>
+        <div id="observe"></div>
+        <script type="module">
+            // Load the Observable runtime and inspector.
+            import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+
+            // Your notebook, compiled as an ES module.
+            import notebook from "https://api.observablehq.com/@jashkenas/ouroboros-a-notebook-embeds-itself.js?v=3";
+
+            // Load the notebook, observing its cells with a default Inspector
+            // that simply renders the value of each cell into the provided DOM node.
+            new Runtime().module(notebook, Inspector.into(document.getElementById('observe')));
+        </script>
+        <p>The above data has been pulled by the Observable's Runtime and Inspector and populated on the Div element with id = "observe" in 
+            my source html document. If you do a shift+ctrl+I on your browser, and check the elements you will find the associated script and the 
+            DOM. 
+        </p>
+</body>
+
+</html>

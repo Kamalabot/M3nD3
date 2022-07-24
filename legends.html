@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>From Observable with Love</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="libraries/d3.js"></script>
+    <script src="libraries/arquero.js"></script>
+</head>
+
+<body>
+    <div id="observablehq-f209e3e4">
+        <div class="observablehq-viewof-offset"></div>
+        <div class="observablehq-chart"></div>
+        <div class="observablehq-area"></div>
+        <div class="observablehq-randomize"></div>
+        <div class="observablehq-bumps"></div>
+        <div style="overflow: hidden;"><a style="display: block; float:right;"
+                href="https://observablehq.com/@d3/streamgraph-transitions@144"><object type="image/svg+xml"
+                    style="pointer-events: none;" width=180 height=22
+                    data="https://static.observableusercontent.com/files/c3fab254a006f1a3a1f9f63aba8ab1460db4752529036b9962950bde0ec195bab823daa6b278b1c3401e545b3bd640ddfdcad805cf9859af218cb2b9fed4ddf0"></object></a>
+        </div>
+    </div>
+    <script type="module">
+        import { Runtime, Inspector } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+        import define from "https://api.observablehq.com/@d3/streamgraph-transitions@144.js?v=3";
+        (new Runtime).module(define, name => {
+            if (name === "viewof offset") return Inspector.into("#observablehq-f209e3e4 .observablehq-viewof-offset")();
+            if (name === "chart") return Inspector.into("#observablehq-f209e3e4 .observablehq-chart")();
+            if (name === "area") return Inspector.into("#observablehq-f209e3e4 .observablehq-area")();
+            if (name === "randomize") return Inspector.into("#observablehq-f209e3e4 .observablehq-randomize")();
+            if (name === "bumps") return Inspector.into("#observablehq-f209e3e4 .observablehq-bumps")();
+        });
+    </script>
+    <div>
+        <h1>Bring in the Legends</h1>
+        <p>The story on the visualisation unfolds, new questions arises in the observers mind. The answer to the
+            questions on why something is shaped, colored or sized is answered by the Legends. Legends inform how the
+            data has been
+            mapped to the plot or visualisation. They do more than inform but participate in helping making the visual
+            interactive.</p>
+
+        <h3>Why we need to talk about interpolators before going into Legends</h3>
+        <p>D3 has many functions to interpolate between numbers, and legends need such interpolation if it needs to be
+            programmable. Not only
+            that, the interpolators help in making the scales and transitions possible. You can read more about it <a
+                href="https://observablehq.com/@d3/d3-interpolate?collection=@d3/d3-interpolate">here</a>
+            Building the legends from the interpolator is the next step.
+        </p>
+        <h3>Getting inputs from the user and updating the data on the page</h3>
+        <p>The simplest way </p>
+        <script type="module" src="legends.js"></script>
+</body>
+
+</html>

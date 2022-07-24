@@ -122,6 +122,9 @@ window.addEventListener('load',(e)=>{
         .range([0, rectL])
         .paddingInner(0.2)
 
+    var legend = d3.legendColor()
+        .scale(xPand);
+
     var xB = d3.axisBottom(xBand).ticks(4)
     //console.log(chartGrid[0["chart"]])
     const xBg = d3.select("#svg0").append('g')
@@ -134,6 +137,7 @@ window.addEventListener('load',(e)=>{
         .attr('transform',`translate(${marginCh.left},${rectL + marginCh.top})`)
     //bars imported from outside
     bars('svg1',marginCh,xPand,rectL,rectB)
+    xPad.call(legend)
 
     squares('svg2',marginCh,'linear');
     
