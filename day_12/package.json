@@ -1,0 +1,14 @@
+{
+  "name": "@thetylerwolf/day-12-interactions-1-click-and-hover",
+  "main": "3984fc745c44caea@135.js",
+  "version": "135.0.0",
+  "homepage": "https://observablehq.com/@thetylerwolf/day-12-interactions-1-click-and-hover",
+  "author": {
+    "name": "Tyler Wolf",
+    "url": "https://observablehq.com/@thetylerwolf"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}
