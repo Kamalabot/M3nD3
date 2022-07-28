@@ -1,0 +1,14 @@
+{
+  "name": "@thetylerwolf/day-21-object-constancy",
+  "main": "c75c33072c3e161b@348.js",
+  "version": "348.0.0",
+  "homepage": "https://observablehq.com/@thetylerwolf/day-21-object-constancy",
+  "author": {
+    "name": "Tyler Wolf",
+    "url": "https://observablehq.com/@thetylerwolf"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}

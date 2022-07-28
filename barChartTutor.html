@@ -16,7 +16,7 @@
             color: hotpink;
         }
         text{
-            color: aquamarine;
+            color: black;
         }
     </style>
     <script src="libraries/d3.js"></script>
@@ -30,27 +30,22 @@
         var s = d3.scaleLinear()
             .range([0,300])
             .domain([5,98])
-        d3.select('.chart')
-            .selectAll('div')
-            .data(dat)
-            .join('div')
-            .style('width',d => s(d) + "px")
-            .text(d => d)
-        //Bar that is correct
-        var bar = d3.select('svg')
-            .append('g')
-            .selectAll('rect')
-            .data(dat)
-            .join('rect')
-            .attr('width',10)
-            .attr("y",d => 500 - d)
-            .attr("x",(d,i) => i * 15)
-            .attr("height",500)
-        //text of the bar chart
-        bar.append('text')
-            .attr("y",d => d - 10)
-            .attr('x',(d,i) => i * 15)
-            .text(d => d)
+        // d3.select('.chart')
+        //     .selectAll('div')
+        //     .data(dat)
+        //     .join('div')
+        //     .style('width',d => s(d) + "px")
+        //     .text(d => d)
+        //Bar that is correct, now let me add a button and call it to update the data randomly
+        var updtButton = d3.select('svg')
+            .append('rect')
+            .attr('id','update')
+            .attr('x', 150)
+            .attr('y', 150)
+            .attr('height',25)
+            .attr('width',50)
+            .attr('fill','green')
+            .text('update')
 
         d3.select('svg')
             .append('g')
@@ -61,6 +56,28 @@
             .attr("y",0)
             .attr("x",(d,i) => i * 15)
             .attr("height",d => 450 - d)
+        //Lets continue the play shall we?? learnt some neat tricks from Mori...
+        var updt = document.getElementById('update')
+        updt.addEventListener('click',updateDat) //Okay this works..
+        function updateDat(){
+            //console.log('getttingIN')
+            dat.push(Math.round(Math.random()*100))
+            //console.log(dat)
+            var bar = d3.select('svg')
+            .append('g')
+            .selectAll('rect')
+            .data(dat)
+            .join('rect')
+            .attr('width',10)
+            .attr("y",d => 500 - d)
+            .attr("x",(d,i) => i * 15)
+            .attr("height",500)
+        //text of the bar chart
+            bar.append('text')
+            .attr("y",d => d - 10)
+            .attr('x',(d,i) => i * 15)
+            .text(d => d)
+        }
     </script>
 </body>
 </html>
