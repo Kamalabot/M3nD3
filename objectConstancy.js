@@ -6,19 +6,17 @@ var format = d3.format(".1%"),
     states,
     age;
 
-var x = d3.scale.linear()
+var x = d3.scaleLinear()
     .range([0, width]);
 
-var y = d3.scale.ordinal()
-    .rangeRoundBands([0, height], .1);
+var y = d3.scaleOrdinal()
+    .range([0, height], .1);
 
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("top")
+var xAxis = d3.axisBottom(x)
     .tickSize(-height - margin.bottom)
     .tickFormat(format);
 
-var svg = d3.select("#chart").append("svg")
+var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .style("margin-left", -margin.left + "px")
@@ -90,12 +88,12 @@ function redraw() {
 
   barEnter.append("rect")
       .attr("width", age && function(d) { return x(d[age]); })
-      .attr("height", y.rangeBand());
+      .attr("height", y.bandwidth());
 
   barEnter.append("text")
       .attr("class", "label")
       .attr("x", -3)
-      .attr("y", y.rangeBand() / 2)
+      .attr("y", y.bandwidth() / 2)
       .attr("dy", ".35em")
       .attr("text-anchor", "end")
       .text(function(d) { return d.State; });
@@ -103,7 +101,7 @@ function redraw() {
   barEnter.append("text")
       .attr("class", "value")
       .attr("x", age && function(d) { return x(d[age]) - 3; })
-      .attr("y", y.rangeBand() / 2)
+      .attr("y", y.bandwidth() / 2)
       .attr("dy", ".35em")
       .attr("text-anchor", "end");
 
