@@ -116,3 +116,23 @@ div {
   font-size: 3.7em;
   fill: #635F5D;
 }
+
+.ctitle {
+  font-size: 1.7em;
+  fill: #635F5D;
+}
+
+.clabel {
+  font-size: 1em;
+  fill: black;
+}
+
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  stroke: #665544;
+}

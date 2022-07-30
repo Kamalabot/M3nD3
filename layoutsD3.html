@@ -33,9 +33,37 @@
             ideas explored will come at the bottom
             <strong>Option 2</strong> Use multiple SVGs to be created for each layout with the datasets chosen for it.
         </p>
-        <p>Choosing option 2 to use of multiple SVGs layout for each chart.</p>
-        <h2>Pie Chart</h2>
-        <svg id="pie" width="300" height="300"></svg>
-        <script src="layoutsD3.js"></script>
+        <p>Choosing option 2 to use of multiple SVGs layout for each chart. Each chart has many features like 
+            <ol>
+                <li>Adding Text</li>
+                <li>Interactivity</li>
+                <li>Specific features</li>
+            </ol>
+            Each of these variants of the chart will be rendered inside a single svg assigned to the chart using the id attribute. Example, 
+            the "pie chart" will be assigned to svg with id = 'pie'. All its variants will also be under this same svg.
+        </p>
+        <p>The scripts that render the charts will be different.They will be appended to the page body with different names.</p>
+        <h3>What is clobbering in JS?</h3>
+        <p>When the element that is already on dom is removed, or modified in detrimental way it is called Cloberring. D3 and JQuery can create 
+            such scenarios very easily.
+        </p>
+        <h3>D3's selectAll method clobbers my tags. What to do?</h3>
+        <p>It will take some time to realize that D3's selectAll is clobbering your DOM. This can be mitigated by classing or giving specific
+            id to the elements that are created with D3. In this way, the elements created manually is safeguarded. Classes and IDs are not only
+            to assign styles and attributes, they give identity to the tags on the page.
+        </p>
+        <svg id="pie" width="900" height="300"></svg>
+        <button onclick="update(renderData1)" translate="25,-110">Data1</button>
+        <button onclick="update(renderData2)" translate="50,-110">Data2</button>
+        <div id="pieData"></div>
+        <script src="layoutScripts/pie.js"></script>
+        <script src="layoutScripts/pieT.js"></script>
+        <script src="layoutScripts/pieInt.js"></script>
+        <h3>How to wrap the text in D3 text tag?</h3>
+        <p>There is no straight forward way. There is block by <a href="https://bl.ocks.org/mbostock/raw/7555321/">Bostock</a> which
+        is providing a long solution. Will explore further and implement.</p>
+        <svg id="histo" width="900" height="350"></svg>
+        <div id="histData"></div>
+        <script src="layoutScripts/hist.js"></script>
     </body>
 </html>
