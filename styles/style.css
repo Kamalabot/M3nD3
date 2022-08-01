@@ -134,5 +134,12 @@ pre {
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
-  stroke: #665544;
+  fill: #665544;
+}
+
+.tooltip{
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
 }

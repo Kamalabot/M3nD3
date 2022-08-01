@@ -62,8 +62,20 @@
         <h3>How to wrap the text in D3 text tag?</h3>
         <p>There is no straight forward way. There is block by <a href="https://bl.ocks.org/mbostock/raw/7555321/">Bostock</a> which
         is providing a long solution. Will explore further and implement.</p>
+        <h3>Marks in the 2nd Histogram stopped Rendering</h3>
+        <p>Asynchronous control flow means the function I thought that will execute, doesn't.
+            In case of Histogram charts, the data is downloaded. I initiate this download in 1st 
+            script, and use it to make the marks. When I tried to use the same script, with the name 
+            changed, the file download action did not execute...
+        </p>
+        <p>Using the window.addEventListner to load the file also failed when using multiple files. 
+            The way out I chose is to refactor the code and decided to import the functions that are necessary 
+            to build the charts.
+        </p>
         <svg id="histo" width="900" height="350"></svg>
         <div id="histData"></div>
-        <script src="layoutScripts/hist.js"></script>
+        <script type="module" src="layoutScripts/hist.js"></script>
+        <h1>Working out a different plan to document the learnings</h1>
     </body>
 </html>
+
