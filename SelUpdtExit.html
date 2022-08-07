@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Basic area chart in d3.js</title>
+
+  <!-- Custom styles for this template -->
+  <link href="../css/agency.css" rel="stylesheet">
+
+  <!-- PRISM -->
+  <script src="../LIB/prism.js"></script>
+  <link href="../LIB/prism.css" rel="stylesheet" />
+
+  <!-- JQUERY -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+
+  <!-- Function to parse html and js code chunks made by Yan Holtz -->
+  <script src="../js/myParser.js"></script>
+
+</head>
+
+<div class="col-lg-5 .align-middle">
+    <div style="position: -webkit-sticky; position: sticky; top: 120px">
+      <div class="bg-light" id="result"></div>
+    </div>
+</div>
+<!-- ========= show html code ============== -->
+<pre class="language-html d-none d3v6-chunk"><code id="code-html-v6" contenteditable="true"><xmp><!DOCTYPE html>
+    <meta charset="utf-8">
+    
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- Create a div where the graph will take place -->
+    <div id="my_dataviz"></div>
+    <button onclick=changeData()>ClickMe</button>
+</xmp></code></pre>
+<!-- ========= show JS code v6 ==============  -->
+<pre class="language-js d-none d3v6-chunk"><code id="code-js-v6" contenteditable="true"><xmp><script>
+
+    // set the dimensions and margins of the graph
+    const margin = {top: 10, right: 30, bottom: 30, left: 50},
+          width = 460 - margin.left - margin.right,
+          height = 400 - margin.top - margin.bottom;
+    
+    // append the svg object to the body of the page
+    const svg = d3.select("#my_dataviz")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",`translate(${margin.left},${margin.top})`);
+    
+    //Read the data
+    var generatePlayers = () => d3.range(30).map(d => ({
+            name: `Player ${ d }`,
+            score: 0
+            }))
+    
+    var randomizeScores = (players, stdDev) => {
+        players.forEach(d => d.score = Math.floor(d3.randomNormal(100, stdDev || 10)()/10))
+        players.sort((a,b) => b.score - a.score)    
+    }
+
+    function changeData(){
+        var temp = generatePlayers();
+        randomizeScores(temp,50)
+
+        console.log(temp)
+
+        d3.select('svg')
+            .selectAll('text')
+            .data(temp.slice(0,5), d => d.name)
+            .join(
+                enter => enter.append('text')
+                    .attr('dy','1.25em')
+                    .attr('transform', (d,i) => `translate(${10}, ${i * 25})`)
+                    .style('fill','green')
+                    .text(d => d.name)
+                    .selection(),
+                update => update
+                    .style('fill','red')                
+                    .attr('transform',(d,i) => `translate(${50},${i * 25})`)
+                    .transition().duration(2000)
+                    .attr('transform',(d,i) => `translate(${10},${i * 25})`)
+                    .selection(),
+                exit => exit
+                    .transition().duration(2500)
+                    .attr('transform',(d,i) => `translate(${60},${i * 37})`)
+                    .remove()
+            )
+    }
+
+</script></xmp></code></pre>
+    
+<script>
+    showCodeVersion('v6')
+</script>    
