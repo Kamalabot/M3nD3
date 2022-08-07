@@ -4,26 +4,34 @@
 <head>
   <meta charset="utf-8">
   <title>Basic area chart in d3.js</title>
-
-  <!-- Custom styles for this template -->
-  <link href="../css/agency.css" rel="stylesheet">
-
+  
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+ 
   <!-- PRISM -->
   <script src="../LIB/prism.js"></script>
   <link href="../LIB/prism.css" rel="stylesheet" />
 
   <!-- JQUERY -->
   <script src="../vendor/jquery/jquery.min.js"></script>
-
+-
   <!-- Function to parse html and js code chunks made by Yan Holtz -->
-  <script src="../js/myParser.js"></script>
+  <script src="js/myParser.js"></script>
+  <script src="js/neatjson.js"></script>
 
 </head>
 
-<div class="col-lg-5 .align-middle">
-    <div style="position: -webkit-sticky; position: sticky; top: 120px">
-      <div class="bg-light" id="result"></div>
-    </div>
+<div class="column1of2">
+    <div class="bg-light" id="result"></div>
+</div>
+<div class="column2of2">
+    <div class="bg-light" id="dataObj"></div>
+</div>
+<div class="column1of2">
+    <div class="bg-light" id="head"></div>
+</div>
+<div class="column2of2">
+    <div class="bg-light" id="scrip"></div>
 </div>
 <!-- ========= show html code ============== -->
 <pre class="language-html d-none d3v6-chunk"><code id="code-html-v6" contenteditable="true"><xmp><!DOCTYPE html>
@@ -36,6 +44,7 @@
     <div id="my_dataviz"></div>
     <button onclick=changeData()>ClickMe</button>
 </xmp></code></pre>
+
 <!-- ========= show JS code v6 ==============  -->
 <pre class="language-js d-none d3v6-chunk"><code id="code-js-v6" contenteditable="true"><xmp><script>
 
@@ -67,7 +76,7 @@
         var temp = generatePlayers();
         randomizeScores(temp,50)
 
-        console.log(temp)
+    document.getElementById('dataObj').innerText = neatJSON(temp.slice(0,5))
 
         d3.select('svg')
             .selectAll('text')

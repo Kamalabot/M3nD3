@@ -51,8 +51,7 @@ code[class*="language-"]::selection, code[class*="language-"] ::selection {
 /* Code blocks */
 pre[class*="language-"] {
 	padding: 1em;
-	margin: .5em 0;
-	overflow: auto;
+	margin: .5em;
 }
 
 :not(pre) > code[class*="language-"],
@@ -139,4 +138,13 @@ pre[class*="language-"] {
 	cursor: help;
 }
 
+.column1of2 {
+	float: left;
+	width: 300px;
+	margin: 10px;}
 
+.column2of2 {
+	float: left;
+	width: 300px;
+	margin: 10px;
+}
