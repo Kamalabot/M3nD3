@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cyclists Data Analysis</title>
+    <link rel="stylesheet" href="tachyons.min.css">
+    <script src="d3.min.js"></script>
+</head>
+
+<body class="Roboto pa1">
+    <section class="cf w-100 pv3 ba flex flex-wrap">
+        <div class="fl w-100 f4">
+            <h1>Cyclists Bike Share Data</h1>
+        </div>
+        <div class="pv3 ba w-100 w-50-m">
+            <p class="pa1 lh-copy">
+                Raw data is tabulated by using D3's selection method. There are 14
+                columns and more than 300 Thousand rows. Only the random 5 rows
+                are shown here, with help of D3's selection methods. Seeing the data as a 
+                table, with the column names and the values in each columns can help to take decisions 
+                on type of analysis that can be done on each column.
+            </p>
+            <div class="ba w-100 overflow-auto" id="dataArea"></div>
+            <script src="dataArea.js"></script>
+        </div>
+    </section>
+    <section class="cf w-100 pv1 ph3 ph4-ns ba">
+        <div class="flex">
+            <div class="fl w-third">
+                <p class="f6 b ttc tracked pv0">How is Trip Duration Distributed?</p>
+                <a href="#" style="background-image: url(googAnalytics/tripDurationHisto.png)"class="link mw5 dt hide-child br2 cover bg-center">
+                    <span class=" white dtc v-mid w-100 h-100 child bg-black-50 pa5">
+                    Explore
+                    </span>
+                </a>
+                <p class="lh-copy f6">
+                   Given the bikes are located in stations, the distance between the stations can be constant. Trip duration can provide idea on 
+                how long the bikes are used. Depending on that further analysis can be undertaken</p>
+            </div>
+            <div class="fl w-third">
+                <p class="f6 b ttc tracked pv0">How far the pickup and drops are?</p>
+                <a href="#" style="background-image: url(googAnalytics/haversignDistance.png)"class="link mw5 dt hide-child br2 cover bg-center">
+                    <span class=" white dtc v-mid w-100 h-100 child bg-black-50 pa5">
+                    Get Distributions
+                    </span>
+                </a>
+                <p class="lh-copy f6">Bikes are versatile and easy to handle. People use it for variety of purposes.Using the haversign distance
+                    distribution further analysis can be undertaken.
+                </p>
+            </div>
+            <div class="fl w-third">
+                <p class="f6 b ttc tracked pv0">Distance and Duration</p>
+                <a href="#" style="background-image: url(googAnalytics/distDuration.png)"class="link mw5 dt hide-child br2 cover bg-center">
+                    <span class=" white dtc v-mid w-100 h-100 child bg-black-50 pa5">
+                    Find Insights
+                    </span>
+                </a>
+                <p class="lh-copy f6">
+                    Every customer will use the bikes for the repeatable purposes. Can we identify the repeatable purpose by using the 
+                haversign distance and the time taken to complete the trip? Lets start by exploring it with dot plot. </p>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
