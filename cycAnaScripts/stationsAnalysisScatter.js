@@ -31,13 +31,8 @@ function buildDropDown(divId, listData, forId, attrName, labelName,rawData) {
       .attr('id',forId)
       //placing the event listener here leads to entire list selected
       .on('change',function(e, d){
-        if (this.id == "startStn"){
           var start = this.value;
-          scatterPlot(rawData,start,undefined);
-        }else{
-          var end = this.value;
-          scatterPlot(rawData,undefined,end)
-        }
+          scatterPlot(rawData,start);
       }) 
     startStnDd.selectAll('option')
       .data(listData)
@@ -66,33 +61,42 @@ d3.csv("TripV2@1.csv").then((data) => {
   });
   startStationSet = new Set(scatterData.map((d) => d.startStn))
   startStations = [...startStationSet].sort();
-  endStationSet = new Set(scatterData.map((d) => d.endStn))
-  endStations = [...endStationSet].sort();
-  buildDropDown("drop", startStations,'startStn','startStations','Start Stations', scatterData);
-  buildDropDown("drop", endStations,'endStn','endStations','Ending Stations',scatterData);
+  buildDropDown("drop", startStations,'startStn','startStations','Available Stations', scatterData);
+  scatterPlot(scatterData,"2112 W Peterson Ave")
 });
 
 const svg = d3.select("#scatter");
 const width = svg.attr("width");
 const height = svg.attr("height");
 
-const margin = { top: 20, bottom: 20, right: 30, left: 30 };
+const margin = { top: 20, bottom: 50, right: 30, left: 50 };
 
 const xAxis = svg
     .append("g")
     .attr("transform", `translate(0,${height - margin.bottom})`);
 
+xAxis.append('text')
+  .attr('transform','translate(250,30)')
+  .text('Trip Duration =>')
+  .attr('class','f5')
+  .attr('fill','black')
+
 const yAxis = svg
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
+yAxis.append('text')
+  .text('Haversign Distance =>')
+  .attr('transform','translate(-20,40) rotate(270)')
+  .attr('class','f5')
+  .attr('fill','black')
 const xScale = d3
     .scaleLinear()
     .range([margin.left, width - margin.right]);
 
 const yScale = d3
     .scaleLinear()
-    .range([height - margin.top - margin.bottom, margin.bottom]);
+    .range([height - margin.top - margin.bottom,0]);
 
 const ride = d3
     .scaleOrdinal()
@@ -100,13 +104,8 @@ const ride = d3
     .range(["blue", "green", "orange"]);
 
 
-function scatterPlot(tabData, startStation, endStation) {
-  if (startStation == undefined){
-  filteredData = tabData.filter((d) => d.endStn === endStation);
-  } else if (endStation == undefined){
+function scatterPlot(tabData, startStation) {
   filteredData = tabData.filter((d) => d.startStn === startStation);
-  }
-  
   //Domain is attached seperately and called.
   xScale.domain(d3.extent(filteredData, (d) => d.tripDuration))
   yScale.domain(d3.extent(filteredData, (d) => d.haversignDist))
@@ -120,7 +119,6 @@ function scatterPlot(tabData, startStation, endStation) {
     .style("opacity", 0)
     .attr("class", "ba ph4 pv2 mb2 dib br3 bw2 f6 bg-light-blue");
   var mouseOver = function (d) {
-    console.log(d3.mouse(this));
     toolTip
       .html(
         `Trip Duration: ${d.tripDuration}<br>
@@ -132,8 +130,9 @@ function scatterPlot(tabData, startStation, endStation) {
       .style("opacity", 1);
   };
   var mouseOut = function (d) {
+    d3.select(this).style("opacity", 0.3);
     toolTip.transition().duration(1000).style("opacity", 0);
-    d3.select(this).style("opacity", 0.7);
+    d3.select(this).style("opacity", 0.3);
   };
   const marks = svg
     .selectAll("circle")
@@ -148,11 +147,11 @@ function scatterPlot(tabData, startStation, endStation) {
         .on("mouseover", mouseOver)
         .on("mouseleave", mouseOut),
       update => update
-        .attr('opacity',0.3)
+        .attr('opacity',0)
         .transition().duration(2500)
-        .attr('opacity',0.9),
+        .attr('opacity',0.6),
       exit => exit
-        .transition().duration(2500)
+        .transition().duration(1000)
         .attr('transform',(d,i)=> `translate(${d.tripDuration + 25}
             ${d.haversignDist + 50})`)
         .remove()

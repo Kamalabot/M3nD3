@@ -8,11 +8,11 @@
 </head>
 
 <body class="Roboto pa1">
-    <section class="cf w-100 pv3 ba flex flex-wrap">
+    <section class="cf w-100 pv3 flex flex-wrap">
         <div class="fl w-100 f4">
             <h1>Cyclists Bike Share Data</h1>
         </div>
-        <div class="pv3 ba w-100">
+        <div class="pv3 w-100">
             <p class="pa1 lh-copy">
                 Raw data is tabulated by using D3's selection method. There are 14
                 columns and more than 300 Thousand rows. Only the random 5 rows
@@ -20,11 +20,11 @@
                 table, with the column names and the values in each columns can help to take decisions 
                 on type of analysis that can be done on each column.
             </p>
-            <div class="ba w-100 overflow-auto" id="dataArea"></div>
+            <div class="w-100 overflow-auto pv3" id="dataArea"></div>
             <script src="dataArea.js"></script>
         </div>
     </section>
-    <section class="cf w-100 pv1 ph3 ph4-ns ba">
+    <section class="cf w-100 pv1 ph3 ph4-ns">
         <div class="flex flex-wrap">
             <div class="fl w-third">
                 <p class="f6 b ttc tracked pv0">How is Trip Duration Distributed?</p>
@@ -50,7 +50,7 @@
             </div>
             <div class="fl w-third">
                 <p class="f6 b ttc tracked pv0">Distance and Duration</p>
-                <a href="#" style="background-image: url(googAnalytics/distDuration.png)"class="link mw5 dt hide-child br2 cover bg-center">
+                <a href="distanceDuration.html" style="background-image: url(googAnalytics/distDuration.png)"class="link mw5 dt hide-child br2 cover bg-center">
                     <span class=" white dtc v-mid w-100 h-100 child bg-black-50 pa5">
                     Find Insights
                     </span>
@@ -61,7 +61,7 @@
             </div>
             <div class="fl w-third">
                 <p class="f6 b ttc tracked pv0">Stations and Distances</p>
-                <a href="#" style="background-image: url(googAnalytics/distDuration.png)"class="link mw5 dt hide-child br2 cover bg-center">
+                <a href="stationsAnalysisInteractively.html" style="background-image: url(googAnalytics/stationsNDistances.png)"class="link mw5 dt hide-child br2 cover bg-center">
                     <span class=" white dtc v-mid w-100 h-100 child bg-black-50 pa5">
                     Finding insights between stations
                     </span>

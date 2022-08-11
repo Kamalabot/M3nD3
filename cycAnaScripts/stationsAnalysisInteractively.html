@@ -11,18 +11,22 @@
     <div class="mw9 center">
         <h1 class="f1 tc">Stations and its Relationship</h1>
         <div class="flex ph2 flex-wrap">
-            <p class="lh-copy w-50 w-100-m fl">Data is shared for the trip duration between many stations.
+            <p class="lh-copy w-50 w-100-m fl">
+                <a class="fw6 lh-copy">How many stations are there? </a>Data is shared for the trip duration between many stations.
                 Filtering the stations interactively and viewing the data transform can provide additional
-                information that was hidden in the clutter.
+                information that is hidden in the clutter. We will be using the drop down for all the available
+                stations. There is whooping <a class="fw8">601</a> stations in data. There are many stations 
+                in which the bike trips are very less. 
             </p>
-            <p class="lh-copy w-50 w-100-m fl">Building the Dropdown list in html can be a laborious process. Not after
-                D3.
+            <p class="lh-copy w-50 w-100-m fl">
+                <a class="fw6 lh-copy">How to build a drop down with all the stations?</a>
+                D3 can easily rescue us from such activities.
                 All we need is location where we want the drop down, the list that is going to enter into the list.
-                We will create two dropdowns, one for the start and another for the end stations.<a
+                The start and the end stations both are same, so only one drop down is created. Format for creating 
+                the drop down is referred from the freeCode camp site<a
                     href="https://www.freecodecamp.org/news/html-select-tag-how-to-make-a-dropdown-menu-or-combo-list/"
-                    class="link black no-underline hover-bg-yellow">Drop Down reference.</a> We will first create two
-                divs
-                that will float on either side of the scatter plot.
+                    class="link black no-underline hover-bg-yellow">Drop Down reference.</a> 
+                    We will first create two divs that will float on either side of the scatter plot.
             </p>
         </div>
     </div>
@@ -34,28 +38,31 @@
                     <p class="tl lh-copy">Representing the distance and duration makes the data very physical in nature,
                         because of the involvement
                         of time and distance dimensions. Lets dive into the Pseudo code of bringing the scatter plot on
-                        to the svg.
+                        to the svg. There were couple of gotchas during the making of the charts.
                     </p>
                     <h2 class="f6 tl">Visual Pseudo</h2>
                     <ul>
-                        <li class="lh-copy tl">Create g elements to hold the axes. Append the g elements to the svg by
-                            selecting the id = "scatter"</li>
-                        <li class="lh-copy tl">Build x, y linear scales with the range set between the margins. </li>
-                        <li class="lh-copy tl">Creating the marks as circles with center coordinates mapped to the
-                            tripDuration and haversign Distance.
+                        <li class="lh-copy tl">The frame of the chart is created using the regular d3.selection method.
+                            The axes are appended to the g-elems.The calls to the d3.axis() methods with the updating 
+                            scales are updated as the new data is provided.
                         </li>
-                        <li class="lh-copy tl">Ridetype is identified with the color that assigned to the circle with
-                            the Ordinal scales.</li>
-                        <li class="lh-copy tl">Learning about the data point is made easy by the tool tip that populates
-                            on the chart left corner.</li>
+                        <li class="lh-copy tl">When the DOM is built at the page load using the D3 method, the event listener
+                            needs to be attached to the selection chain as shown in drop down function below.</li>
+                        <li class="lh-copy tl">Much time was spent in trying to reach the drop down select value using the 
+                            document and d3 DOM query methods. If the Query methods don't find any Object to attach with,the 
+                            addEventListener cannot read the "Null" value from the query methods.
+                        </li>
+                        <li class="lh-copy tl">Once the value is extracted from the drop down, use it in the JS filter
+                            method to modify the data and feed it into the General Update pattern
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="fl w-100 w-50-l tc">
                 <div class="di flex" id="drop"></div>
                 <div class="pv2" id="chart">
-                    <h1 class="f3 lh-title">Chart</h1>
-                    <svg width="450" height="300" viewBox="0 0 400 300" id="scatter"></svg>
+                    <h1 class="f3 lh-title">Interactive Scatter Plot</h1>
+                    <svg width="450" height="400" id="scatter"></svg>
                 </div>
                 <div class="ml7 f6 dn"><a href="https://stackoverflow.com/questions/3120739/resizing-svg-in-html"
                         class="link no-underline hover-red">Svg Resize</a></div>
@@ -65,63 +72,104 @@
             <div class="fl w-100 w-50-l tc">
                 <div class="pv4">
                     <h1 class="f3 lh-title">Data Format</h1>
-                    <p class="tl lh-copy measure-wide">Three variables are used for building chart.
-                        To get the haversign distance lattitude and longitude coordinates are passed into
-                        the haversign function and final data is returned. Simple map() function is used
-                        for this purpose.
-                        Following that the plotting function is called to render the chart.
+                    <p class="tl lh-copy measure-wide">Simple Array of elements contains the station names. To place them inside the 
+                        dropdown framework, understanding of the mechanism how it drop down, selection and events linked with the 
+                        dropdown works is required. Below code shows the process in action.     
 
                     </p>
-                    <p class="tl w-100 ttc fw6">The Haversign Function</p>
+                    <p class="tl w-100 ttc fw6">Drop down with D3 </p>
                     <div class="w-100 overflow-auto" id="js">
                         <pre>
-function rad(x) {return x*Math.PI/180;}
-
-function distHaversine(p1, p2) {
-    var R = 6371; // earth's mean radius in km
-    var dLat  = rad(p2[0] - p1[0]);
-    var dLong = rad(p2[1] - p1[1]);
+    function buildDropDown(divId, listData, forId, attrName, labelName,rawData) {
+        //Build the start station dropdown
+        const dropStrt = d3.select(`#${divId}`)
+            .append('label')
+            .attr('for',forId)
+            .text(labelName)
+        
+        const startStnDd = dropStrt.append('select')
+            .attr('name',attrName)
+            .attr('class','w-50')
+            .attr('id',forId)
+            //placing the event listener here leads to entire list selected
+            .on('change',function(e, d){
+                var start = this.value;
+                scatterPlot(rawData,start);
+            }) 
+        startStnDd.selectAll('option')
+            .data(listData)
+            .join('option')
+            .attr('value', d => d)
+            .text(d =>d)
     
-    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-            Math.cos(rad(p1[0])) * Math.cos(rad(p2[0])) * Math.sin(dLong/2) * Math.sin(dLong/2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    var dist = R * c;
-    
-    return dist.toFixed(3);
-    }</pre>
+        }
+                            </pre>
                     </div>
                 </div>
             </div>
             <div class="fl w-100 w-50-l tc">
                 <div class="pv4">
-                    <h1 class="f3 lh-title">Code</h1>
+                    <h1 class="f3 lh-title">Coding Interactive Chart</h1>
                     <div class="w-100 overflow-auto" id="js">
                         <pre>
-scatterData = data.map((d) => {
-    return {
-        rideableType: d.rideable_type,
-        member: d.member_casual == "member"? "yes" : "no",
-        tripDuration: +d.tripduration / 60,
-        startStn: d.start_station_name,
-        endStn: d.end_station_name, 
-        haversignDist : +distHaversine([d.start_lat,d.start_lng],[d.end_lat,d.end_lng])
-    }
-})
+        function scatterPlot(tabData, startStation) {
+            filteredData = tabData.filter((d) => d.startStn === startStation);
+            //Domain is attached seperately and called.
+            xScale.domain(d3.extent(filteredData, (d) => d.tripDuration))
+            yScale.domain(d3.extent(filteredData, (d) => d.haversignDist))
+            
+            xAxis.transition().duration(1000).call(d3.axisBottom(xScale));
+            yAxis.transition().duration(1000).call(d3.axisLeft(yScale));
+            
+            var toolTip = d3
+                .select("#chart")
+                .append("div")
+                .style("opacity", 0)
+                .attr("class", "ba ph4 pv2 mb2 dib br3 bw2 f6 bg-light-blue");
+            var mouseOver = function (d) {
+                console.log(d3.mouse(this));
+                toolTip
+                .html(
+                    `Trip Duration: ${d.tripDuration}<br>
+                                Haversign Distance: ${d.haversignDist}<br>
+                                Ride Type:${d.rideableType}`
+                )
+                .transition()
+                .duration(1000)
+                .style("opacity", 1);
+            };
+            var mouseOut = function (d) {
+                toolTip.transition().duration(1000).style("opacity", 0);
+                d3.select(this).style("opacity", 0.7);
+            };
+            const marks = svg
+                .selectAll("circle")
+                .data(filteredData)
+                .join(
+                enter => enter.append('circle')
+                    .attr("cx", (d) => xScale(d.tripDuration))
+                    .attr("cy", (d) => yScale(d.haversignDist))
+                    .attr("fill", (d) => ride(d.rideableType))
+                    .attr("r", 5)
+                    .style("opacity", 0.7)
+                    .on("mouseover", mouseOver)
+                    .on("mouseleave", mouseOut),
+                update => update
+                    .attr('opacity',0.3)
+                    .transition().duration(2500)
+                    .attr('opacity',0.9),
+                exit => exit
+                    .transition().duration(2500)
+                    .attr('transform',(d,i)=> `translate(${d.tripDuration + 25}
+                        ${d.haversignDist + 50})`)
+                    .remove()
+                )
 </pre>
                     </div>
                 </div>
             </div>
         </div>
-        <label>Choose an ice cream flavor:
-            <select class="ice-cream" name="ice-cream">
-                <option value="">Select One …</option>
-                <option value="chocolate">Chocolate</option>
-                <option value="sardine">Sardine</option>
-                <option value="vanilla">Vanilla</option>
-            </select>
-        </label>
-
-        <div class="result"></div>
+        
         <script src="stationsAnalysisScatter.js"></script>
 </body>
 
