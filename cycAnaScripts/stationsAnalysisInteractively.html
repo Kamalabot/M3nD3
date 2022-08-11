@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Interactive Stations</title>
+    <link rel="stylesheet" href="tachyons.min.css">
+    <script src="d3.min.js"></script>
+</head>
+
+<body class="sans-serif pa1">
+    <div class="mw9 center">
+        <h1 class="f1 tc">Stations and its Relationship</h1>
+        <div class="flex ph2 flex-wrap">
+            <p class="lh-copy w-50 w-100-m fl">Data is shared for the trip duration between many stations.
+                Filtering the stations interactively and viewing the data transform can provide additional
+                information that was hidden in the clutter.
+            </p>
+            <p class="lh-copy w-50 w-100-m fl">Building the Dropdown list in html can be a laborious process. Not after
+                D3.
+                All we need is location where we want the drop down, the list that is going to enter into the list.
+                We will create two dropdowns, one for the start and another for the end stations.<a
+                    href="https://www.freecodecamp.org/news/html-select-tag-how-to-make-a-dropdown-menu-or-combo-list/"
+                    class="link black no-underline hover-bg-yellow">Drop Down reference.</a> We will first create two
+                divs
+                that will float on either side of the scatter plot.
+            </p>
+        </div>
+    </div>
+    <div class="mw9 center ph1-ns">
+        <div class="cf ph1-ns">
+            <div class="fl w-100 w-50-l pt1 tc">
+                <div class="pv2 tc">
+                    <h1 class="f3 lh-title">Pseudo Code</h1>
+                    <p class="tl lh-copy">Representing the distance and duration makes the data very physical in nature,
+                        because of the involvement
+                        of time and distance dimensions. Lets dive into the Pseudo code of bringing the scatter plot on
+                        to the svg.
+                    </p>
+                    <h2 class="f6 tl">Visual Pseudo</h2>
+                    <ul>
+                        <li class="lh-copy tl">Create g elements to hold the axes. Append the g elements to the svg by
+                            selecting the id = "scatter"</li>
+                        <li class="lh-copy tl">Build x, y linear scales with the range set between the margins. </li>
+                        <li class="lh-copy tl">Creating the marks as circles with center coordinates mapped to the
+                            tripDuration and haversign Distance.
+                        </li>
+                        <li class="lh-copy tl">Ridetype is identified with the color that assigned to the circle with
+                            the Ordinal scales.</li>
+                        <li class="lh-copy tl">Learning about the data point is made easy by the tool tip that populates
+                            on the chart left corner.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="fl w-100 w-50-l tc">
+                <div class="di flex" id="drop"></div>
+                <div class="pv2" id="chart">
+                    <h1 class="f3 lh-title">Chart</h1>
+                    <svg width="450" height="300" viewBox="0 0 400 300" id="scatter"></svg>
+                </div>
+                <div class="ml7 f6 dn"><a href="https://stackoverflow.com/questions/3120739/resizing-svg-in-html"
+                        class="link no-underline hover-red">Svg Resize</a></div>
+            </div>
+        </div>
+        <div class="cf ph1-ns">
+            <div class="fl w-100 w-50-l tc">
+                <div class="pv4">
+                    <h1 class="f3 lh-title">Data Format</h1>
+                    <p class="tl lh-copy measure-wide">Three variables are used for building chart.
+                        To get the haversign distance lattitude and longitude coordinates are passed into
+                        the haversign function and final data is returned. Simple map() function is used
+                        for this purpose.
+                        Following that the plotting function is called to render the chart.
+
+                    </p>
+                    <p class="tl w-100 ttc fw6">The Haversign Function</p>
+                    <div class="w-100 overflow-auto" id="js">
+                        <pre>
+function rad(x) {return x*Math.PI/180;}
+
+function distHaversine(p1, p2) {
+    var R = 6371; // earth's mean radius in km
+    var dLat  = rad(p2[0] - p1[0]);
+    var dLong = rad(p2[1] - p1[1]);
+    
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(rad(p1[0])) * Math.cos(rad(p2[0])) * Math.sin(dLong/2) * Math.sin(dLong/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var dist = R * c;
+    
+    return dist.toFixed(3);
+    }</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="fl w-100 w-50-l tc">
+                <div class="pv4">
+                    <h1 class="f3 lh-title">Code</h1>
+                    <div class="w-100 overflow-auto" id="js">
+                        <pre>
+scatterData = data.map((d) => {
+    return {
+        rideableType: d.rideable_type,
+        member: d.member_casual == "member"? "yes" : "no",
+        tripDuration: +d.tripduration / 60,
+        startStn: d.start_station_name,
+        endStn: d.end_station_name, 
+        haversignDist : +distHaversine([d.start_lat,d.start_lng],[d.end_lat,d.end_lng])
+    }
+})
+</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <label>Choose an ice cream flavor:
+            <select class="ice-cream" name="ice-cream">
+                <option value="">Select One …</option>
+                <option value="chocolate">Chocolate</option>
+                <option value="sardine">Sardine</option>
+                <option value="vanilla">Vanilla</option>
+            </select>
+        </label>
+
+        <div class="result"></div>
+        <script src="stationsAnalysisScatter.js"></script>
+</body>
+
+</html>

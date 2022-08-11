@@ -7,15 +7,15 @@
     <script src="d3.min.js"></script>
 </head>
 
-<body class="calisto pa1">
+<body class="sans-serif pa1">
     <div class="mw9 center">
         <h1 class="f1 tc">Distance Vs Duration Scatter</h1>
         <div class="flex ph2 flex-wrap">
-            <p class="f4 lh-copy w-50 w-100-m fl">Scatter plot between Haversign Distance and the Trip Duration from the Google Analytics Course. 
+            <p class="lh-copy w-50 w-100-m fl">Scatter plot between Haversign Distance and the Trip Duration from the Google Analytics Course. 
                 Trip duration is given in seconds.
                 While the Haversign distance is calculated from the lattitude and longitude coordinates.
             </p>
-            <p class="f4 lh-copy w-50 w-100-m fl">Before deciding on Haversign distance, I planned to use the Google maps api
+            <p class="lh-copy w-50 w-100-m fl">Before deciding on Haversign distance, I planned to use the Google maps api
                 to get exact distance
                 between the two coordinates. Additional steps through the API felt unnecessary at the beginning of the
                 analysis. Searched Stack overflow
@@ -27,8 +27,8 @@
     </div>
     <div class="mw9 center ph1-ns">
         <div class="cf ph1-ns">
-            <div class="fl w-100 w-50-l pa1 tc">
-                <div class="pv4 tc">
+            <div class="fl w-100 w-50-l pt1 tc">
+                <div class="pv2 tc">
                     <h1 class="f3 lh-title">Pseudo Code</h1>
                     <p class="tl lh-copy">Representing the distance and duration makes the data very physical in nature, because of the involvement
                         of time and distance dimensions. Lets dive into the Pseudo code of bringing the scatter plot on to the svg.
@@ -44,59 +44,63 @@
                     </ul>
                 </div>
             </div>
-            <div class="fl w-100 w-50-l pa1 tc">
-                <div class="pv4" id="chart">
+            <div class="fl w-100 w-50-l tc">
+                <div class="pv2" id="chart">
                     <h1 class="f3 lh-title">Chart</h1>
-                    <svg width="500" height="300" id="scatter"></svg>
+                    <svg width="450" height="300"
+                    viewBox="0 0 400 300" id="scatter"></svg>
                 </div>
+                <div class="ml7 f6 dn"><a href="https://stackoverflow.com/questions/3120739/resizing-svg-in-html" class="link no-underline hover-red">Svg Resize</a></div>
                 <script src="duraDistScatter.js"></script>
             </div>
         </div>
         <div class="cf ph1-ns">
-            <div class="fl w-100 w-50-l pa1 tc">
+            <div class="fl w-100 w-50-l tc">
                 <div class="pv4">
                     <h1 class="f3 lh-title">Data Format</h1>
-                    <p class="tl f4 lh-copy measure">Three variables are used for building chart.
+                    <p class="tl lh-copy measure-wide">Three variables are used for building chart.
                         To get the haversign distance lattitude and longitude coordinates are passed into 
                         the haversign function and final data is returned. Simple map() function is used 
                         for this purpose. 
                         Following that the plotting function is called to render the chart. 
 
                     </p>
-                        <p class="f4 tl w-100 ttc fw6">The Haversign Function</p>
-                        <div class="ba w-100 overflow-auto" id="js">
+                        <p class="tl w-100 ttc fw6">The Haversign Function</p>
+                        <div class="w-100 overflow-auto" id="js">
                             <pre>
-rad = function(x) {return x*Math.PI/180;}
-distHaversine = function(p1, p2) {
-var R = 6371; // earth's mean radius in km
-var dLat  = rad(p2.lat() - p1.lat());
-var dLong = rad(p2.lng() - p1.lng());
+function rad(x) {return x*Math.PI/180;}
 
-var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) * Math.sin(dLong/2) * Math.sin(dLong/2);
-var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-var dist = R * c;
-
-return dist.toFixed(3);
-}</pre>
+function distHaversine(p1, p2) {
+    var R = 6371; // earth's mean radius in km
+    var dLat  = rad(p2[0] - p1[0]);
+    var dLong = rad(p2[1] - p1[1]);
+  
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(rad(p1[0])) * Math.cos(rad(p2[0])) * Math.sin(dLong/2) * Math.sin(dLong/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var dist = R * c;
+  
+    return dist.toFixed(3);
+  }</pre>
                         </div>
                 </div>
             </div>
-            <div class="fl w-100 w-50-l pa1 tc">
+            <div class="fl w-100 w-50-l tc">
                 <div class="pv4">
                     <h1 class="f3 lh-title">Code</h1>
-                    <code class="pa3 b--black-10 h5 bg-white-20" id="js">
-                        scatterData = data.map((d) => {
-                            return {
-                              rideableType: d.rideable_type,
-                              member: d.member_casual == "member"? "yes" : "no",
-                              tripDuration: +d.tripduration / 60,
-                              startStn: d.start_station_name,
-                              endStn: d.end_station_name, 
-                              haversignDist : +distHaversine([d.start_lat,d.start_lng],[d.end_lat,d.end_lng])
-                            }
-                        })
-                        </code>
+                    <div class="w-100 overflow-auto" id="js">
+                        <pre>
+scatterData = data.map((d) => {
+    return {
+        rideableType: d.rideable_type,
+        member: d.member_casual == "member"? "yes" : "no",
+        tripDuration: +d.tripduration / 60,
+        startStn: d.start_station_name,
+        endStn: d.end_station_name, 
+        haversignDist : +distHaversine([d.start_lat,d.start_lng],[d.end_lat,d.end_lng])
+    }
+})
+</pre>
                 </div>
             </div>
         </div>
