@@ -11,11 +11,11 @@
     <div class="mw9 center">
         <h1 class="f1 tc">Distance Vs Duration Scatter</h1>
         <div class="flex ph2 flex-wrap">
-            <p class="f4 lh-copy measure-narrow fl">Scatter plot between Haversign Distance and the Trip Duration from the Google Analytics Course. 
+            <p class="f4 lh-copy w-50 w-100-m fl">Scatter plot between Haversign Distance and the Trip Duration from the Google Analytics Course. 
                 Trip duration is given in seconds.
                 While the Haversign distance is calculated from the lattitude and longitude coordinates.
             </p>
-            <p class="f4 lh-copy measure fl">Before deciding on Haversign distance, I planned to use the Google maps api
+            <p class="f4 lh-copy w-50 w-100-m fl">Before deciding on Haversign distance, I planned to use the Google maps api
                 to get exact distance
                 between the two coordinates. Additional steps through the API felt unnecessary at the beginning of the
                 analysis. Searched Stack overflow
@@ -33,22 +33,19 @@
                     <p class="tl lh-copy">Representing the distance and duration makes the data very physical in nature, because of the involvement
                         of time and distance dimensions. Lets dive into the Pseudo code of bringing the scatter plot on to the svg.
                     </p>
-                    <h2 class="f6 tl">Steps Involved</h2>
+                    <h2 class="f6 tl">Visual Pseudo</h2>
                     <ul>
                         <li class="lh-copy tl">Create g elements to hold the axes. Append the g elements to the svg by selecting the id = "scatter"</li>
-                        <li class="lh-copy tl">Build x, y linear scales with the range set between the available margins </li>
-                        <li class="lh-copy tl">Circles can be easier since the center along with radius does the trick
+                        <li class="lh-copy tl">Build x, y linear scales with the range set between the margins. </li>
+                        <li class="lh-copy tl">Creating the marks as circles with center coordinates mapped to the tripDuration and haversign Distance.
                         </li>
-                        <li class="lh-copy tl">Rect can be of any width and start from any coordinates. Creating another
-                            rect</li>
-                        <li class="lh-copy tl">Circle is copied and the center coordinate is shifted</li>
-                        <li class="lh-copy tl">Other two rectangles are similarly copied and moved</li>
-
+                        <li class="lh-copy tl">Ridetype is identified with the color that assigned to the circle with the Ordinal scales.</li>
+                        <li class="lh-copy tl">Learning about the data point is made easy by the tool tip that populates on the chart left corner.</li>
                     </ul>
                 </div>
             </div>
             <div class="fl w-100 w-50-l pa1 tc">
-                <div class="pv4">
+                <div class="pv4" id="chart">
                     <h1 class="f3 lh-title">Chart</h1>
                     <svg width="500" height="300" id="scatter"></svg>
                 </div>
@@ -59,42 +56,46 @@
             <div class="fl w-100 w-50-l pa1 tc">
                 <div class="pv4">
                     <h1 class="f3 lh-title">Data Format</h1>
-                    <p class="tl f4 lh-copy measure">Data to make the shape is randomly imagined. It is formatted into
-                        X, Y and width, height
-                        or radius in case of circle.There is data involved in the fills too. The location of the mid
-                        rectangle is colored "Red"
-                        and the bottom circle is colored green</p>
+                    <p class="tl f4 lh-copy measure">Three variables are used for building chart.
+                        To get the haversign distance lattitude and longitude coordinates are passed into 
+                        the haversign function and final data is returned. Simple map() function is used 
+                        for this purpose. 
+                        Following that the plotting function is called to render the chart. 
+
+                    </p>
                         <p class="f4 tl w-100 ttc fw6">The Haversign Function</p>
-                        <pre class="athelas tl f5"><code  id="javascript">
-                            rad = function(x) {return x*Math.PI/180;}
-                            distHaversine = function(p1, p2) {
-                            var R = 6371; // earth's mean radius in km
-                            var dLat  = rad(p2.lat() - p1.lat());
-                            var dLong = rad(p2.lng() - p1.lng());
-            
-                            var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                                    Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) * Math.sin(dLong/2) * Math.sin(dLong/2);
-                            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-                            var dist = R * c;
-            
-                            return dist.toFixed(3);
-                            }
-                        </code></pre>
+                        <div class="ba w-100 overflow-auto" id="js">
+                            <pre>
+rad = function(x) {return x*Math.PI/180;}
+distHaversine = function(p1, p2) {
+var R = 6371; // earth's mean radius in km
+var dLat  = rad(p2.lat() - p1.lat());
+var dLong = rad(p2.lng() - p1.lng());
+
+var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) * Math.sin(dLong/2) * Math.sin(dLong/2);
+var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+var dist = R * c;
+
+return dist.toFixed(3);
+}</pre>
+                        </div>
                 </div>
             </div>
             <div class="fl w-100 w-50-l pa1 tc">
                 <div class="pv4">
                     <h1 class="f3 lh-title">Code</h1>
                     <code class="pa3 b--black-10 h5 bg-white-20" id="js">
-                            &ltsvg width="500" height="300"&gt
-                                &ltrect width="100" height="100" x="0" y="0" /&gt
-                                &ltrect width="100" height="100" x="50" y="50" fill="red" /&gt
-                                &ltcircle cx="150" cy="150" r="50" fill="green" /&gt
-                                &ltcircle cx="300" cy="150" r="50" fill="green" /&gt
-                                &ltrect width="150" height="20" x="150" y="140" fill="red" /&gt
-                                &ltrect width="100" height="100" x="350" y="0" /&gt
-                                &ltrect width="100" height="100" x="300" y="50" fill="red" /&gt
-                            &lt/svg&gt
+                        scatterData = data.map((d) => {
+                            return {
+                              rideableType: d.rideable_type,
+                              member: d.member_casual == "member"? "yes" : "no",
+                              tripDuration: +d.tripduration / 60,
+                              startStn: d.start_station_name,
+                              endStn: d.end_station_name, 
+                              haversignDist : +distHaversine([d.start_lat,d.start_lng],[d.end_lat,d.end_lng])
+                            }
+                        })
                         </code>
                 </div>
             </div>

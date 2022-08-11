@@ -61,6 +61,28 @@ function scatterPlot(tabData){
         xAxis.call(d3.axisBottom(xScale))
         yAxis.call(d3.axisLeft(yScale))
         
+        var toolTip = d3.select("#chart")
+            .append("div")
+            .style("opacity",0)
+            .attr('class',"ba ph4 pv2 mb2 dib br3 bw2 f6 bg-light-blue")
+        var mouseOver = function(d){
+            console.log(d3.mouse(this))
+            toolTip
+                .html(`Trip Duration: ${d.tripDuration}<br>
+                    Haversign Distance: ${d.haversignDist}<br>
+                    Ride Type:${d.rideableType}`)        
+                 .transition()
+                 .duration(1000)
+                 .style('opacity',1)
+        }   
+        var mouseOut = function(d){
+            toolTip
+                .transition()
+                .duration(1000)
+                .style('opacity',0)
+            d3.select(this)
+                .style('opacity',0.7)
+        }
         const marks = svg.selectAll('circle')
             .data(filteredData)
             .join('circle')
@@ -68,4 +90,7 @@ function scatterPlot(tabData){
             .attr('cy', d => yScale(d.haversignDist))
             .attr('fill',d => ride(d.rideableType))
             .attr('r', 5)
+            .style('opacity',0.7)    
+            .on('mouseover',mouseOver)
+            .on('mouseleave',mouseOut)
     }
