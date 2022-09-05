@@ -10,13 +10,39 @@
 <body class="Roboto pa1">
     <section class="cf w-100 pv3 ba flex flex-wrap">
         <div class="fl w-100 f4">
-            <h1>Basic Experimenting Interaction </h1>
+            <h1>Experimenting Interaction </h1>
         </div>
         <div class="pv3 ba w-50 w-100-m">
-            <svg width="500" height="300" class="bg-green"></svg>
+            <svg width="500" height="300" id="circle"></svg>
+            <script>
+                const svg = d3.select("#circle")
+                svg.on('mouseover',dotted)
+                svg.append('circle')
+                    .attr('r',75)
+                    .attr('cx',250)
+                    .attr('cy',150)
+                    .attr('fill','green')
+                    .on('click',interact)
+
+                function dotted(d){
+                    console.log(d)
+                }
+                function interact(d,index){
+                    localCircle = d3.select(this)
+                    localCircle
+                        .transition()
+                        .duration(1000)
+                        .attr('fill','yellow')
+                    localData = d3.select('#data')
+                    localData.append('p')
+                        .attr('class','f6 b ttc red')
+                        .append('text')
+                        .text('This is displayed after clicking.The circle turns yellow. transition fades in, do you see?')       
+                }
+            </script>
         </div>
-        <div class="pv3 ba w-50 w-100-m">
-            <svg width="500" height="300" class="bg-green"></svg>
+        <div class="pv3 ba w-50 w-100-m" id="data">
+            <p class="f6 b ttc bg-green">This is always displayed</p>
         </div>
     </section>
     <section class="cf w-100 pv1 ph3 ph4-ns ba">

@@ -1,0 +1,120 @@
+The role:
+
+Our first visualization engineer will own the development of our charting libraries and infrastructure. Your mission will be to turn our customer’s data into useful, intuitive visualizations. Our interface is highly interactive – you’ll help us design the interactions that allow users to intuitively get context and insights from their data. Visualization is core to our approach and your work will be front and center in the product.
+
+We’re an early team so we’re still establishing large parts of our software stack – you will have major ownership over the product and you’ll help us pick the right technologies. We have a culture of autonomy and ownership and want engineers who are excited to drive their work. As an early employee you’ll help us craft our culture and will be aware of (and can participate in) customer development and goto market.
+
+About you:
+
+You have a deep knowledge of javascript/typescript and data visualization. 
+Specifically data manipulation and data processing, mastery of the DOM and D3 (or other low-level charting libraries).
+
+You have experience with React and application state management.
+
+You have a strong sense for visual design and visualization best practices.
+
+Job description
+We are looking for an early-career interactive journalist to join our London-based data team to help ensure our digital journalism looks great, works perfectly on every device and can handle millions of users. Our new colleague will help us design and build data-rich and multimedia articles with Svelte and D3.js. 
+Above all, they will make sure our interactives are clear, well-designed, and convey a story to our readers. 
+They’ll help us do everything from forecasting elections and conveying the course of the war in Ukraine to 
+exploring African ruins and tracking trends in popular music .
+
+The ideal candidate will have a portfolio that demonstrates strong design and typography skills. 
+They should have a good eye for detail and a keen interest in global politics and current affairs, 
+and experience working with and understanding data.
+
+Essential skills
+Digital design principles
+Typography
+D3.js
+JavaScript/HTML/CSS
+Experience in data analysis and information design
+
+Desired skills
+UX/UI design
+Svelte (or another similar framework like React, Vue, etc)
+A statistical programming tool such as R or Python/pandas
+Adobe Illustrator, Sketch and/or Figma
+QGIS (or other GIS software)
+WebGL (ThreeJS, regl)
+
+Essential functions:
+
+Design visually engaging dashboards that transform potentially complicated statistical analyses into simple, 
+actionable insights that drive decision-making.
+Collect, ingest, manage, combine, analyze and visualize data for client projects.
+Develop statistical models to identify risk and drive client decision-making.
+Advise clients on strategies for building their own internal data and analytics capabilities.
+The person:
+
+The Insights Lab is looking for an analytics and visualization expert who shows up with ideas. 
+The ideal candidate will have strong business-acumen and a demonstrated track record of designing and 
+delivering innovative, analytically-powered products and services. You should also have strong communication skills 
+(writing, interpersonal, public), be comfortable with statistical fundamentals, and possess the drive to come up 
+with an idea and then deliver high quality results quickly. 
+
+You must also be comfortable translating often complex methods and insights into a language that is easily consumable 
+to audiences not as well-versed in analytics (including attorneys and clients). The ideal candidate will be part 
+data analyst, part data wrangler, and part storyteller.
+
+Desired skillset:
+
+Proven experience in a similar role.
+Experience with Tableau, MicroStrategy, PowerBI, or similar visualization tools required.
+Bachelor’s degree in statistics, computer science, engineering, applied mathematics or a similar quantitative field required; advanced degree (with a focus on machine learning, artificial intelligence, or a related specialty) welcome, but not required.
+Experience in one or more of the following areas is a plus: ethical decision-making (compliance, ethics, risk management); diversity, equity and inclusion; organizational culture; and / or corporate social responsibility.
+Experience in developing algorithms, building analytical models, and employing regression and machine learning techniques (supervised and unsupervised) to address business challenges.
+Substantive experience with data extraction / manipulation using Python and/or R.
+Must be creative, strategic and business-minded – with strong problem-solving abilities.
+Excellent communication, collaboration and interpersonal skills.
+
+The Requirements 
+
+1-3 years’ experience as a Data Visualization Developer / BI Developer
+Expertise building with leading analytics tools (preferably Tableau, Microsoft PowerBI, or Qlik Sense)
+SQL or Data Warehousing experience (preferably Snowflake, Google Big Query, Dremio, PostgreSQL, Databricks, dbt)
+User-centered design mindset
+Comfortability generating and mocking up realistic datasets
+Strong skills in dashboard design, reporting, and data storytelling
+A desire to co-develop solutions with coworkers, partners, and customers
+Experience with data mining and knowledge of ML is a plus
+An appreciation of various internal departments and their needs from a data visualization perspective e.g. Finance, Sales, Marketing, HR, and so on.
+BS in Computer Science, Engineering, or relevant field
+Beneficial: skills in video editing, prototyping/wireframes, social media marketing
+The Right Person
+
+Ability to work individually and collaboratively within a team environment
+Tech-savvy and eager to learn new technology and practices
+Thrives in fast-paced and high-growth companies
+Clear and thoughtful communicator with exceptional critical thinking skills
+Ability to contribute to building new processes and systems
+Excellent verbal & written communication skills
+Detail-oriented and analytical
+Charming, sincere, compelling
+Curious, robust, persistent, tenacious
+Committed, willing to learn and keen to grow
+You aim high, embrace challenge and always do what’s right
+
+What we expect
+
+Experience in creating clear graphics using best practices in data visualization, 
+visual prioritization, color theory, accessibility principles, etc.
+Experience or relevant training in sustainable development (political science, economics, 
+social sciences, engineering, journalism, philosophy, etc.) or data visualization (analysis, data, design, visualization)
+Very good understanding of French and English. We work in French internally and 
+interact in French and English with our clients. A third language may be an asset
+Demonstrated interest in sustainable development issues
+Ease in the vagueness of early mandates and the ability to refine both the need and the
+ solution from a wide range of possibilities
+Software tools: MS Office 365 (Excel, PowerPoint, Word), Google Workspace (Drive, Docs, Sheets, Slides), Slack, Asana, Skype. 
+If you are familiar with the Adobe suite, all the better.
+
+As a key member of the Expedia Group Data Visualisation team, the Data Visualisation Engineer II will 
+play a pivotal role in supporting our key partners, ensuring they are able to turn data effectively and 
+quickly into insights, driving business decisions and strategy.
+
+I’m happy to answer questions about the role, best way to get noticed is to apply below and share your 
+portfolio with our recruiter.
+
+50% hybrid role, usually 2 days a week in our Angel office in London with the rest working from home.
+No sponsorship available I’m afraid.
