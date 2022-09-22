@@ -8,20 +8,34 @@
 </head>
 
 
-<body class="Roboto pa1">
+<body class="Roboto pa1 bg-near-white">
     <div class="f4 link tl"><a href="./index.html">Home</a></div>
     <section class="cf w-100 pv2 flex flex-wrap">
         <div class="fl w-100 f4 tc">
-            <h1>Gap Minder? Not again</h1>
+            <h1>Gap Minder? The Beginnings</h1>
         </div>
-        <div class="flex items-center justify-center pa4" id="slidecontainer">
-            <input type="range" min="1955" max="2005" value="5" class="slider" id="myRange" />
+        <div class="flex pa1 tc" id="slidecontainer">
+            <p class="f4 lh-copy">Years :</p>
+            <input type="range" min=1955 max=2005 step=5 class="slider" id="myRange" />
             <p class="f4 lh-copy" id="output"></p>
+        </div>
+        <div class="fl w-100 f4 tc">
+            <p>Fertility Rate Vs Life Expectancy</p>
         </div>
         <div class="pv1 w-100 tc" id="graph">
             <svg width="600" height="600" id="chart"></svg>
+        </div>
+        <div class="fl w-two-thirds center f4">
             <p class="f4 lh-copy">
-                Bubbles were moving across the screm
+                Bubbles!!! How captivating they are? Made with soap or <strong>DATA</strong> they hold everyone's attention.
+                In 2014 I was captivated by Rosling's talk about changing the Mindset with the Dataset. Not for the content 
+                but for the visuals. Underlying the visuals, I knew that data was there. How the data gets there? That is a 
+                different story. 
+            </p>
+            <p class="f4 lh-copy">With D3, it is trivial to make bubble charts. It is not trivial to get the Data to D3. After trying other libraries
+             that were filled with layers of abstraction, libraries that were simple in certain environments, I realised the power 
+             is with who go below these abstraction, and learn to solve the problems on their own. Even if it means learning new 
+             language like JS and D3.js to visualise the data.  
             </p>
         </div>
     </section>

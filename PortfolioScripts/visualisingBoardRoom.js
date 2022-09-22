@@ -93,8 +93,3 @@ function visualBoard(inBoundData){
                 .text( d=>d[0] );
             }
 }
-
-//Market Analysis subroutine
-function visualMarket(inBound){
-    console.log(inBound)
-}

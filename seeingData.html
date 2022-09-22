@@ -1,12 +1,82 @@
 <!DOCTYPE html>
-<body>
+<html lang="en">
 
-<div id="observablehq-f49f57ef"></div>
-<p>Credit: <a href="https://observablehq.com/@solverbot/seeing-the-data-structures-in-d3">Seeing the Data Structures in D3 by M M Kamalraj</a></p>
+<head>
+    <title>Seeing Data</title>
+    <link rel="stylesheet" href="vendor/tachyons/tachyons.min.css">
+    <script src="js/d3.v6.js"></script>
+</head>
 
-<script type="module">
-import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-import define from "https://api.observablehq.com/@solverbot/seeing-the-data-structures-in-d3@218.js?v=3";
-new Runtime().module(define, Inspector.into("#observablehq-f49f57ef"));
-</script>
+<body class="Roboto pa1 bg-near-white">
+    <div class="f4 link tl"><a href="./index.html">Home</a></div>
+    <section class="cf w-100 pv2 flex flex-wrap">
+        <div class="fl w-100 f4 tc">
+            <h1>How to visualise Data Structures</h1>
+        </div>
+        <div class="fl w-100 f4 tl">
+            <h2>By Seeing It</h2>
+            <p class="f4 lh-copy">
+                The <a href="https://docs.google.com/spreadsheets/d/1YiuHdfZv_JZ-igOemKJMRaU8dkucfmHxOP6Od3FraW8/gviz/tq?tqx=out:csv">Aid Data</a> used in this page is available as CSV. It has been imported 
+                to visualise how the data is getting transformed as we work in D3. Before seeing the transformation the data undergoes, lets look at the Force
+                directed graph   
+            </p>
+        </div>
+        <div class="pv1 w-100">
+            <h1>Web of Aid</h1>
+            <p class="f4 lh-copy">
+                It is surprising to see how close knitted the nations are. Below we see only the connection of top 10 aid donors and 20 aid recievers.
+                That alone has resulted in 191 connections that you are seeing below. How the data looks under the vertices and the edges of the network
+                graph? <strong>That is the subject of discussion</strong> 
+            </p>
+        </div>
+        <div class="pv1 w-100 tc" id="graph">
+            <svg width="500" height="400" id="chart"></svg>
+        </div>
+        <div class="fl w-100 f4 tl">
+            <div class="fl w-50">
+                <h3>Json Format</h3>
+                <p class="json"></p>
+            </div>
+            <div class="fl w-50">
+                <h3>d3-Hierarchy Format</h3>
+                <p>Data is having the following structure after aggregating with 
+                    d3.rollups() and d3.hierarchy. But before applying any Layout functions</p>
+                <p class="hierarchy"></p>
+            </div>
+            <div class="fl w-50">
+                <h3>TreeMap Format</h3>
+                <p>Notice the additional x0,x1,y0,y1 keys that have attached. These are values that 
+                    are used for building the treemap layout using the plain rectangles.
+                </p>
+                <p class="treemap"></p>
+            </div>
+            <div class="fl w-50">
+                <h3>NetWork Graph Links</h3>
+                <p>Graphs can be directed or un-directed. We are discussing the graph or network that is 
+                    created by directing the force between source and targets. The data configuration needed
+                    for the above graph is as follows 
+                </p>
+                <p class="linkd"></p>
+            </div>
+            <div class="fl w-50">
+                <h3>NetWork Graph Nodes</h3>
+                <p>Nodes of the graph are positioned after the d3.simulation() completes the calculation.
+                    There are multiple forces specified on the nodes. The nodes that start as simple array 
+                    takes additional keys as shown below. 
+                </p>
+                <p class="noded"></p>
+            </div>
+            <div class="fl w-50">
+                <h3>Final Insights</h3>
+                <p>Looking at the data before it goes through the any of the JS functions or D3's layouts
+                    provides the starting point for the next action that is required. If the starting data 
+                    configuration is not correct, then it can be corrected and further steps can be taken. 
+                    Some layout transformations are dynamic to an extent that, stringifying it will provide only 
+                    the starting data configuration. Deeper understanding is must... Hope this discussion paves 
+                    the way. 
+                </p>
+            </div>
+        </div>
+    </section>
+    <script src="./PortfolioScripts/showingData.js"></script>
 </body>

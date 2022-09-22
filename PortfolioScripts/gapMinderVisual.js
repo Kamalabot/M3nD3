@@ -1,22 +1,31 @@
 //bringing in the data
-d3.json("./ObservableData/gapminder.json").then(res =>{
-    visualGapMinder(res) //Calling the Network graph visualisation subroutine
-
-})
 
 var slider = document.getElementById("myRange");
 
-slider.oninput = function() {
+slider.oninput = function() { 
     output.innerHTML = this.value;
-  }
+    const removeChart = d3.selectAll('circle')
+      .transition()
+      .duration(500)
+      .attr('opacity',0)
+      .remove()
+    d3.json("./ObservableData/gapminder.json").then(res =>{
+      visualGapMinder(res, this.value) //Calling the import inside the slider change function
+  })
+}
 
 var output = document.getElementById("output");
 output.innerHTML = slider.value; // Display the default slider value
 
+d3.json("./ObservableData/gapminder.json").then(res =>{
+  visualGapMinder(res, 1980) //Calling the import inside the slider change function
+})
+
 //Network Graph subroutine
 function visualGapMinder(inBoundData,year){
     const gapminder = inBoundData;
-    console.log(gapminder.filter(d => d.year == +slider.value))
+    console.log(year)
+    console.log(gapminder.filter(d => d.year == year))
     //Setting up the chart
     const svg = d3.select('#chart');
 
@@ -56,11 +65,6 @@ function visualGapMinder(inBoundData,year){
     //Building the Chart
 
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`)
-  
-    const title = svg.append('g').attr('transform',`translate(50,20)`)
-      .append('text')
-      .text('Gap Minder data : Fertility Rate Vs Life Expectancy')
-      .attr('stroke','black')
     
     const xAxis = svg.append('g').attr('transform',`translate(${margin.left},${margin.top+visHeight})`)
       .call(d3.axisBottom(xExpectScale))
@@ -87,6 +91,8 @@ function visualGapMinder(inBoundData,year){
     const bubbles = shape.append('circle')
       .attr('r',d => sizePopSqrt(d.pop))
       .attr('fill', d => coutryColor(d.country))
+      .transition()
+      .duration(500)
       .attr('opacity', 0.5)
       .attr('stroke', d => coutryColor(d.country))
       .attr('stroke-width',3)
