@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<body>
-<script type="module">
+<html lang="en">
 
-// Load the Observable runtime and inspector.
-import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+<head>
+    <title>Inspiration of Gapminder</title>
+    <link rel="stylesheet" href="vendor/tachyons/tachyons.min.css">
+    <script src="js/d3.v6.js"></script>
+</head>
 
-// Your notebook, compiled as an ES module.
-import notebook from "https://api.observablehq.com/@solverbot/my-inspiration-for-data-visualisation.js?v=3";
 
-// Load the notebook, observing its cells with a default Inspector
-// that simply renders the value of each cell into the provided DOM node.
-new Runtime().module(notebook, Inspector.into(document.body));
-
-</script>
+<body class="Roboto pa1">
+    <div class="f4 link tl"><a href="./index.html">Home</a></div>
+    <section class="cf w-100 pv2 flex flex-wrap">
+        <div class="fl w-100 f4 tc">
+            <h1>Gap Minder? Not again</h1>
+        </div>
+        <div class="flex items-center justify-center pa4" id="slidecontainer">
+            <input type="range" min="1955" max="2005" value="5" class="slider" id="myRange" />
+            <p class="f4 lh-copy" id="output"></p>
+        </div>
+        <div class="pv1 w-100 tc" id="graph">
+            <svg width="600" height="600" id="chart"></svg>
+            <p class="f4 lh-copy">
+                Bubbles were moving across the screm
+            </p>
+        </div>
+    </section>
+    <script src="./PortfolioScripts/gapMinderVisual.js"></script>
+</body>

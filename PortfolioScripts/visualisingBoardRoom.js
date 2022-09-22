@@ -22,9 +22,9 @@ function visualBoard(inBoundData){
     const orgsCount = orgs.length;
     //How many execs?
     const execsCount = executives.length;
-    const heading = document.getElementById("heading");
-    heading.textContent = `${orgsCount} organisation lead by ${execsCount} leaders`;
-    console.log(rollUpName.filter(d => d[1] > 3))
+    //const heading = document.getElementById("heading");
+    //heading.textContent = `${orgsCount} organisation lead by ${execsCount} leaders`;
+    //console.log(rollUpName.filter(d => d[1] > 3))
     const interesting = rollUpName.filter(d => d[1] > 3)
     const topExecs = [... new Set(interesting.map(d => d.name))];
     //Who is on many boards? 
@@ -69,20 +69,13 @@ function visualBoard(inBoundData){
             .on('mouseleave',retract)
 
             function interact(event,d,index){
-                console.log(event)
-                localCircle = d3.select(this)
-                localCircle
-                    .transition()
-                    .duration(1000)
-                    .attr('stoke','black')
-                    .attr('stroke-width',5)
                 localData = d3.select('svg')
                 localData.append('text')
-                    .attr('x', event.x)
-                    .attr('y', event.y)
-                    .attr('class','f1 b ttc')
+                    .attr('x', 5)
+                    .attr('y', 20)
+                    .attr('class','f4')
                     .attr('id','tip')
-                    .text(`${d[0]} is on ${d[1]} companies' board`)       
+                    .text(`${d[0]} is on board of ${d[1]} organisation[s]`)       
             }
             function retract(d){
                 data = d3.select('#tip')
