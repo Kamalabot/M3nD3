@@ -1,11 +1,128 @@
 <!DOCTYPE html>
-<body>
-    <div id="observablehq-f663d801"></div>
-    <p>Credit: <a href="https://observablehq.com/@solverbot/analyzing-indian-businesses">Analyzing Indian Businesses by M M Kamalraj</a></p>
-    
-    <script type="module">
-    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-    import define from "https://api.observablehq.com/@solverbot/analyzing-indian-businesses.js?v=3";
-    new Runtime().module(define, Inspector.into("#observablehq-f663d801"));
-    </script>
-</body>
+<html lang="en">
+
+<head>
+    <title>Analysing Indian Businesses</title>
+    <link rel="stylesheet" href="vendor/tachyons/tachyons.min.css">
+    <script src="js/d3.v6.js"></script>
+</head>
+
+
+<body class="Roboto pa1 bg-near-white">
+    <div class="f4 link tl"><a href="./index.html">Home</a></div>
+    <section class="cf w-100 pv2 flex flex-wrap">
+        <div class="fl w-100 f4 tc">
+            <h1>Analysing the Indian Businesses</h1>
+            <p class="f4 lh-copy">
+                Indian companies have rapidly grown in the last decade. I believe the top factor is the stock market, and the trust it has garnered from the 
+                public. I wanted to learn and show how the data that is available out there can be 
+                visualised for easier understanding of the market. Multiple chart layouts and data 
+                configuration are tried out. Following is the exploration and the learnings from that exploration. 
+            </p>
+            <p class="f4 lh-copy tl">Scripts are required to render the charts. For this page, I have resorted to use my existing charts created at <a href="https://observablehq.com/@solverbot/analyzing-indian-businesses?collection=@solverbot/unconventional">Observable HQ</a>
+            and I am importing those charts on to this page. It is blazing fast.</p>
+        </div>
+        <div class="fl w-100 f4">
+            <h3>Groups in Stock Market(fig -1)</h3>
+            <p>The data comes from <a href="https://api.bseindia.com/">BSE API</a> that is accessible to everyone. Data is huge, and my objective here is to 
+                explore the best visual that can show the size of the parts(companies) and the whole(Market). I learnt that companies are categorised into groups 
+                by the market, depending on various parameters. <strong>Group F</strong> stood out as seen below.
+            </p>
+        </div>
+        <div id="observablehq-groupCount-d68cf27e" class="pv1 w-100 tc"></div>
+        <script type="module">
+        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+        import define from "https://api.observablehq.com/@solverbot/analyzing-indian-businesses.js?v=3";
+        new Runtime().module(define, name => {
+          if (name === "groupCount") return new Inspector(document.querySelector("#observablehq-groupCount-d68cf27e"));
+        });
+        </script>
+        <div class="fl w-100 f4">
+            <h3>Visualising the Ecosystem(fig -2)</h3>
+            <p>Skimming through the BSE listed scripts provides some view into the 
+                hierarchies that can be visualised. Individual universes of scripts can be created and explored for more understanding.
+            </p>
+            <ul>
+                <li>What is companies Listing Status?</li>
+                <li>Which group does the script belong in?</li>
+                <li>In case of Fixed Income Script, who is the Issuer? That is a three level of heirarchy which can show the rich ecosystem</li>
+            </ul>
+            <p class="lh-copy f4">Treemap is the first choice. I knew the data is skewed towards those companies with higher market values
+                and bigger in size. When it adds up under the group, some groups are completely sidelined in below visual. What can be done?
+            </p>
+        </div>
+        <div id="observablehq-fGrpScript-91fc077e" hidden="true"></div>
+        <div id="observablehq-fGrpScriptIssuer-91fc077e" hidden="true"></div>
+        <div id="observablehq-bseScriptGroup-91fc077e" hidden="true"></div>
+        <div id="observablehq-bseScriptHierarchy-91fc077e" hidden="true"></div>
+        <div id="observablehq-root-91fc077e" hidden="true"></div>
+        <div id="observablehq-scripDoma-91fc077e" hidden="true"></div>
+        <div id="observablehq-scriptUniLayout-91fc077e" hidden="true"></div>
+        <div id="observablehq-scripColor-91fc077e"hidden="true"></div>
+        <div id="observablehq-treeMap-91fc077e"></div>
+        <div id="observablehq-scriptUniLayoutTreeMap-91fc077e" hidden="true"></div>
+        <script type="module">
+        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+        import define from "https://api.observablehq.com/@solverbot/analyzing-indian-businesses.js?v=3";
+        new Runtime().module(define, name => {
+        if (name === "fGrpScript") return new Inspector(document.querySelector("#observablehq-fGrpScript-91fc077e"));
+        if (name === "fGrpScriptIssuer") return new Inspector(document.querySelector("#observablehq-fGrpScriptIssuer-91fc077e"));
+        if (name === "bseScriptGroup") return new Inspector(document.querySelector("#observablehq-bseScriptGroup-91fc077e"));
+        if (name === "bseScriptHierarchy") return new Inspector(document.querySelector("#observablehq-bseScriptHierarchy-91fc077e"));
+        if (name === "root") return new Inspector(document.querySelector("#observablehq-root-91fc077e"));
+        if (name === "scripDoma") return new Inspector(document.querySelector("#observablehq-scripDoma-91fc077e"));
+        if (name === "scriptUniLayout") return new Inspector(document.querySelector("#observablehq-scriptUniLayout-91fc077e"));
+        if (name === "scripColor") return new Inspector(document.querySelector("#observablehq-scripColor-91fc077e"));
+        if (name === "treeMap") return new Inspector(document.querySelector("#observablehq-treeMap-91fc077e"));
+        if (name === "scriptUniLayoutTreeMap") return new Inspector(document.querySelector("#observablehq-scriptUniLayoutTreeMap-91fc077e"));
+        return ["withOutFV","cirPack","uniParti","scriptUniCirPack","sizeScale"].includes(name);
+        });
+        </script>
+        <div class="fl w-100 f4">
+            <h3>Hey the Delisted Group's Circle is Bigger??(fig -3)</h3>
+            <p class="lh-copy f4"> If you can observe such errors, that itself means the visual is working. After all mistakes are the stepping stones towards the better visual. <strong>Fig-1</strong> shows the "F" group scripts, most of which has been delisted. There 1,222 delisted mutual funds, are given a size value, because I am considering the Face Value for its size. The pack changes completely after the Face value is removed from the calculation. Some times the illogical assumption can provide insights into the data.  
+            </p>
+        </div>
+        <div id="observablehq-fGrpScript-91fc077e" hidden="true"></div>
+        <div id="observablehq-fGrpScriptIssuer-91fc077e" hidden="true"></div>
+        <div id="observablehq-bseScriptGroup-91fc077e" hidden="true"></div>
+        <div id="observablehq-bseScriptHierarchy-91fc077e" hidden="true"></div>
+        <div id="observablehq-root-91fc077e" hidden="true"></div>
+        <div id="observablehq-scripDoma-91fc077e" hidden="true"></div>
+        <div id="observablehq-scripColor-91fc077e" hidden="true"></div>
+        <div id="observablehq-scriptUniCir-91fc077e" hidden="true"></div>
+        <div id="observablehq-scriptUniCirPack-91fc077e" hidden="true"></div>
+        <div id="observablehq-sizeScale-91fc077e" hidden="true"></div>
+        <div id="observablehq-cirPack-91fc077e"></div>
+
+        <script type="module">
+        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+        import define from "https://api.observablehq.com/@solverbot/analyzing-indian-businesses.js?v=3";
+        new Runtime().module(define, name => {
+        if (name === "fGrpScript") return new Inspector(document.querySelector("#observablehq-fGrpScript-91fc077e"));
+        if (name === "fGrpScriptIssuer") return new Inspector(document.querySelector("#observablehq-fGrpScriptIssuer-91fc077e"));
+        if (name === "bseScriptGroup") return new Inspector(document.querySelector("#observablehq-bseScriptGroup-91fc077e"));
+        if (name === "bseScriptHierarchy") return new Inspector(document.querySelector("#observablehq-bseScriptHierarchy-91fc077e"));
+        if (name === "root") return new Inspector(document.querySelector("#observablehq-root-91fc077e"));
+        if (name === "scripDoma") return new Inspector(document.querySelector("#observablehq-scripDoma-91fc077e"));
+        if (name === "scripColor") return new Inspector(document.querySelector("#observablehq-scripColor-91fc077e"));
+        if (name === "scriptUniCir") return new Inspector(document.querySelector("#observablehq-scriptUniCir-91fc077e"));
+        if (name === "scriptUniCirPack") return new Inspector(document.querySelector("#observablehq-scriptUniCirPack-91fc077e"));
+        if (name === "sizeScale") return new Inspector(document.querySelector("#observablehq-sizeScale-91fc077e"));
+        if (name === "cirPack") return new Inspector(document.querySelector("#observablehq-cirPack-91fc077e"));
+        return ["withOutFV","treeMap","uniParti","scriptUniLayoutTreeMap"].includes(name);
+        });
+        </script>
+        <div class="fl w-100 f4">
+            <h3>Liquid and Trusted Companies(fig -4)</h3>
+            <p class="lh-copy f4"> The final visual is still a Circle Pack, that shows the how the companies are clustered in multiple groups, and what the size of each group is. When compared to tabular format of the data, the hierarchy reduces our cognitive load to categorize a company, and then remember it. The purple color shows the <strong>Delisted market</strong> which is not interfering with the A-Group companies which are the most <strong>liquid and trusted</strong> companies.   
+            </p>
+        </div>
+        <div id="observablehq-withOutFV-bdb38913"></div>
+        <script type="module">
+        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+        import define from "https://api.observablehq.com/@solverbot/analyzing-indian-businesses.js?v=3";
+        new Runtime().module(define, name => {
+          if (name === "withOutFV") return new Inspector(document.querySelector("#observablehq-withOutFV-bdb38913"));
+        });
+        </script>
