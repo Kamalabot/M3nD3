@@ -4,7 +4,7 @@
 <head>
     <title>NLP and WordCloud</title>
     <link rel="stylesheet" href="vendor/tachyons/tachyons.min.css">
-    <script src="js/d3.v6.js"></script>
+    <script src="js/compromise.js"></script>
 </head>
 
 
@@ -19,16 +19,30 @@
                 The word cloud creating algorithms provide unique solution to the problem of placing the words that are having different sizes and shapes. Jason Davies' blog about creating the word cloud is eye opening and his repo on d3.cloud() will be center of attraction in this notebook 
             </p>
         </div>
+    </section>
+    <div id="observablehq-nlpCloud-7ba061a0"></div>
+    <script type="module">
+    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+    import define from "https://api.observablehq.com/@solverbot/word-clouding-quora-answers-with-d3.js?v=3";
+    new Runtime().module(define, name => {
+      if (name === "nlpCloud") return new Inspector(document.querySelector("#observablehq-nlpCloud-7ba061a0"));
+    });
+    </script>
+    <section>
         <div class="fl w-100 f4">
-            <h3>Word Frequency Calculation</h3>
+            <h3>Libraries Used:</h3>
             <ul>
-            <li>Compromise cool</li>
-            <li>NLP with Compromise</li>
-            <li>Intro to TF-IDF</li>
-            <li>Word Skimming</li>
+                <li>Compromise by Spencer Kelly</li>
+                <li>d3 Cloud by Jason Davies</li>
+                <li>Observablehq NoteBook</li>
             </ul>
-            <p>
-                I decided to read through the "NLP with Compromise" notebook to understand how to use the Compromise cool library so I can implement it for creating word clouds for my answers. I will let you explore the numerous notebooks on compromise cool and jump directly into creating some function that get some interesting things out of the answers.            </p>
+            <p class="f4 lh-copy">Importing the wordcloud directly from the observable notebook still had some challenges. One is, the HTML section element can confine how the wordcloud svg is rendered. After placing the imported element outside the section element, the cloud rendered. When it was inside the section element, the DOM was populating with all the sub-elements. Only they are not visible on the page.
+            </p>
+            <p class="f4 lh-copy">
+                After reading through multiple notebooks on NLP libraries, the <a href="https://observablehq.com/@randomfractals/nlp-word-cloud">NLP with Compromise </a>notebook nailed it. Compromise does the heavy lifting, with helper function that get word frequencies out of the answers, and put them on the cloud itself.</p>
+            <p class="f4 lh-copy">d3-cloud library that is native inside observable is different from the library that is refered by the books 
+                and tutorials out there. The custom layouts like word cloud needs additional study, and lot more time to make it right. My study here is still <strong>incomplete. </strong>I have decided to spend lot more time programming with text going forward, in Javascript.  
+            </p>
         </div>
     </section>
 </body>
