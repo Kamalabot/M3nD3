@@ -229,6 +229,77 @@ const lineQtrPerfPlot = (dataIn, svgIn, xRef, yRef, refColor) => {
         .attr('dy', -10);
 }
 
+const lineQtrPerfPlot2 = (dataIn, svgIn, xRef, yRef, refColor) => {
+    // console.log(dataIn)
+    //get the values to placed on the charts
+    const cleanDataIn = dataIn;
+    console.log(cleanDataIn)
+    const xData = cleanDataIn.map(d => d[xRef]);
+    const yData = cleanDataIn.map(d => d[yRef]);
+    console.log(xData)
+    const numberFormat = d3.format(".3s");
+
+    const svg = d3.select(`#${svgIn}`);
+    const width = svg.attr('width');
+    const height = svg.attr('height');
+
+    svg.selectAll('*').remove()
+    const chart = svg.append('g')
+        .attr('transform', `translate(${20}, 0)`);
+
+    const xScale = d3.scalePoint()
+        .domain(xData)
+        .range([50, 600])
+
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(yData)])
+        .range([15, 50])
+        .clamp(true);
+
+    const bubbles = chart.selectAll('g')
+        .data(cleanDataIn)
+        .join('g');
+
+    const circles = bubbles.append('circle')
+        .attr('cx', d => xScale(d[xRef]))
+        .attr('cy', 50)
+        .attr('r', d => yScale(d[yRef]))
+        .attr('fill','purple')
+        // .attr('stroke-width',5)
+        .attr('opacity',0.4)
+
+    const linePath =  d3.line()
+            .curve(d3.curveCardinal)
+            .x(d => xScale(d[xRef]))
+            .y(d => height / 2)
+
+    const linesGroup = chart.append('g');
+    
+    linesGroup.append('path')
+        .attr('d', linePath(cleanDataIn))
+        .attr('fill','none')
+        .attr('stroke-width',2)
+        .attr('stroke', refColor)
+
+    const valuesRef = bubbles
+        .append('text')
+        .attr('x', d => xScale(d[xRef]))
+        .attr('y', (height / 2 )+ 25)
+        .text(d => `${numberFormat(d[yRef])}`)
+        .attr('fill', refColor)
+        .attr('font-size', '15')
+        .attr('dy', -10);
+
+    const qtrRef = bubbles
+        .append('text')
+        .attr('x', d => xScale(d[xRef]))
+        .attr('y', (height / 2 )- 20)
+        .text(d => `${d[xRef]}`)
+        .attr('fill', refColor)
+        .attr('font-size', '15')
+        .attr('dy', -10);
+}
+
 
 function axesDomain(axis, axisObject, label, visWidth, visHeight){
     if (axis == 'x' || axis == 'X'){
