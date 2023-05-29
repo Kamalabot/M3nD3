@@ -5,6 +5,22 @@
     <title>SolverBot</title>
     <link rel="stylesheet" href="vendor/tachyons/tachyons.min.css">
     <script src="js/d3.v6.js"></script>
+    <script>
+      (function(d,t) {
+        var BASE_URL="http://0.0.0.0:3000";
+        var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=BASE_URL+"/packs/js/sdk.js";
+        g.defer = true;
+        g.async = true;
+        s.parentNode.insertBefore(g,s);
+        g.onload=function(){
+          window.chatwootSDK.run({
+            websiteToken: 'kq2bq9wN6kNDpht6tMHf96SX',
+            baseUrl: BASE_URL
+          })
+        }
+      })(document,"script");
+    </script>
 </head>
 
 <body class="helvetica pa1 bg-lightest-green">
